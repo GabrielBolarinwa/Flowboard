@@ -1,0 +1,141 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141210;
+    --surface: #1e1b1b;
+    --surface-2: #262219;
+    --border: #35302a;
+    --border-focus: #8c6d3f;
+    --text-primary: #f5f0ea;
+    --text-secondary: #a8968a;
+    --text-muted: #6b5c52;
+    --text-inverse: #141210;
+    --accent: #f59e0b;
+    --accent-hover: #fbbf24;
+    --accent-subtle: #292010;
+    --accent-border: #78490a;
+    --todo-bg: #1a1c2e;
+    --todo-text: #a564fc;
+    --todo-border: #3730a3;
+    --todo-dot: #818cf8;
+    --inprogress-bg: #221a08;
+    --inprogress-text: #fcd34d;
+    --inprogress-border: #78490a;
+    --inprogress-dot: #f59e0b;
+    --review-bg: #1d1628;
+    --review-text: #c4b5fd;
+    --review-border: #4c1d95;
+    --review-dot: #a78bfa;
+    --done-bg: #0c1f18;
+    --done-text: #6ee7b7;
+    --done-border: #065f46;
+    --done-dot: #34d399;
+    --cancelled-bg: #1a1714;
+    --cancelled-text: #78716c;
+    --cancelled-border: #292421;
+    --cancelled-dot: #57534e;
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-card-hover:
+      0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-column: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #faf8f5;
+    --surface: #ffffff;
+    --surface-2: #f3efe9;
+    --border: #e4ddd3;
+    --border-focus: #c4a882;
+    --text-primary: #1c1814;
+    --text-secondary: #6b5e52;
+    --text-muted: #a89888;
+    --text-inverse: #faf8f5;
+    --accent: #097706;
+    --accent-hover: #045309;
+    --accent-subtle: #fef3c7;
+    --accent-border: #fcd340;
+    --todo-bg: #eef2ff;
+    --todo-text: #3730a3;
+    --todo-border: #a5b4fc;
+    --todo-dot: #6366f1;
+    --inprogress-bg: #fffbeb;
+    --inprogress-text: #92400e;
+    --inprogress-border: #fcd340;
+    --inprogress-dot: #f59e08;
+    --review-bg: #f5f3ff;
+    --review-text: #5b21b6;
+    --review-border: #c4b5fd;
+    --review-dot: #7c3aed;
+    --done-bg: #ecfdf5;
+    --done-text: #065f46;
+    --done-border: #6ee7b7;
+    --done-dot: #10b981;
+    --cancelled-bg: #f5f0e8;
+    --cancelled-text: #78716c;
+    --cancelled-border: #d6cfc7;
+    --cancelled-dot: #aba29e;
+    --shadow-card:
+      0 1px 3px rgba(28, 24, 20, 0.06), 0 1px 2px rgba(28, 24, 20, 0.04);
+    --shadow-card-hover:
+      0 4px 12px rgba(28, 24, 20, 0.1), 0 2px 4px rgba(28, 24, 20, 0.06);
+    --shadow-column: 0 1px 2px rgba(28, 24, 20, 0.04);
+  }
+}
+
+@theme inline {
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.5rem;
+  --spacing-6: 2rem;
+  --spacing-7: 3rem;
+  --spacing-8: 4rem;
+  --spacing-9: 6rem;
+  --card-width: 280px;
+  --column-width: 312px;
+  --dialog-max-width: 520px;
+  --dialog-textarea-min: 80px;
+  --dialog-textarea-max: 200px;
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: 12px;
+  --radius-full: 99999px;
+  --font-sans:
+    "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono:
+    "DM Mono", ui-monospace, "SF Mono", "Cascadia Code", "Consolas",
+    "Liberation Mono", monospace;
+  --text-xs: clamp(0.6rem, 0.58rem + 0.18vw, 0.72rem);
+  --text-sm: clamp(0.75rem, 0.72rem + 0.22vw, 0.875rem);
+  --text-base: clamp(0.9rem, 0.85rem + 0.28vw, 1rem);
+  --text-md: clamp(1.1rem, 1rem + 0.5vw, 1.25rem);
+  --text-xl: clamp(1.3rem, 1.1rem + 0.8vw, 1.563rem);
+  --text-2xl: clamp(1.5rem, 1.2rem + 1.2vw, 1.953rem);
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --leading-tight: 1.2;
+  --leading-sng: 1.35;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
+  --tracking-widest: 0.1em;
+}
+
+@layer base {
+  html {
+    @apply overflow-x-hidden scroll-smooth;
+  }
+  body {
+    @apply bg-(--bg) text-base text-(--text-primary);
+  }
+}
