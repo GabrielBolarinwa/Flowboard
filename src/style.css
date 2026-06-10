@@ -136,6 +136,15 @@
     @apply overflow-x-hidden scroll-smooth;
   }
   body {
-    @apply bg-(--bg) text-base text-(--text-primary);
+    @apply bg-(--bg) text-base text-(--text-primary) min-h-dvh font-sans;
+  }
+  h1 {
+    @apply text-2xl font-bold tracking-tight;
+  }
+  h2 {
+    @apply text-xl font-bold;
+  }
+  h3 {
+    @apply text-md font-semibold;
   }
 }
