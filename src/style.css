@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
+
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #141210;
