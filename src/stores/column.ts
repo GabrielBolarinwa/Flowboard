@@ -3,9 +3,14 @@ import { defineStore } from "pinia";
 import { ref, type Ref } from "vue";
 export const useColumnStore = defineStore("ColumnStore", () => {
   const columns: Ref<Column[] | undefined> = ref(undefined);
-  function addColumn(column: Column) {
-    if (columns.value && columns.value?.length >= 10) {
-      return;
+  function addColumn(column: Column, boardId: string) {
+    if (columns.value) {
+      const columnsInBoard = Object.values(columns.value).filter(
+        (col) => col.boardId === boardId,
+      );
+      if (columnsInBoard.length >= 6) {
+        return;
+      }
     }
     columns.value = [];
     columns.value.push(column);
