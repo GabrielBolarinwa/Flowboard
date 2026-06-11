@@ -52,7 +52,7 @@ import NoSearch from "@/components/NoSearch.vue";
 import Input from "@/components/ui/input/Input.vue";
 import { Plus, Search } from "@lucide/vue";
 import { Transition } from "vue";
-import NoBoards from "./NoBoards.vue";
+import NoBoards from "@/components/NoBoards.vue";
 </script>
 
 <style scoped>

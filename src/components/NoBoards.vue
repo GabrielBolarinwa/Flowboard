@@ -3,7 +3,7 @@
     <div
       class="mx-auto bg-(--surface-2) border border-(--border) p-6 rounded-md"
     >
-      <AlignStartHorizontal :size="32" />
+      <KanbanSquare :size="32" />
     </div>
     <p>No boards yet</p>
     <p class="text-(--secondary)">
@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { AlignStartHorizontal, Plus } from "@lucide/vue";
+import { Plus } from "@lucide/vue";
 </script>
 
 <style></style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="p-4 bg-(--accent-subtle) w-12.5 h-12.5 rounded-md">
-      <AlignStartHorizontal :size="18" />
+      <KanbanSquare :size="18" />
     </div>
     <h4>My Frontend Projects</h4>
     <p class="text-sm text-(--secondary)">
@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import { AlignStartHorizontal, Clock, Columns } from "@lucide/vue";
+import { Clock, Columns, KanbanSquare } from "@lucide/vue";
 </script>
 
 <style></style>
