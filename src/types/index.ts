@@ -1,9 +1,11 @@
-export interface Board {
+interface Board {
   id: string;
   name: string;
+  description: string | null;
+  updatedAt: number;
 }
 
-export interface Column {
+interface Column {
   id: string;
   boardId: string;
   name: string;
@@ -11,7 +13,7 @@ export interface Column {
   wipLimit: number | null;
 }
 
-export interface Card {
+interface Card {
   id: string;
   columnId: string;
   title: string;
@@ -34,7 +36,7 @@ interface ActivityEntry {
   timestamp: number;
 }
 
-export interface BoardState {
+interface BoardState {
   boards: Record<string, Board>;
   columns: Record<string, Column>;
   cards: Record<string, Card>;
