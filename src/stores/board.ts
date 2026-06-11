@@ -14,9 +14,9 @@ export const useBoardStore = defineStore("BoardStore", () => {
     boards.value = boards.value?.filter((board) => board.id !== boardId);
   }
   function editBoard(boardId: string, editedBoard: Board) {
-    const board = boards.value?.find((board) => board.id === boardId);
+    let board = boards.value?.find((board) => board.id === boardId);
     if (board) {
-      board.name = editedBoard.name;
+      board = editedBoard;
     }
   }
   function getBoard(boardId: string) {
