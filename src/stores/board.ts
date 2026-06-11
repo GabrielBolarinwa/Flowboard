@@ -4,6 +4,9 @@ import { ref, type Ref } from "vue";
 export const useBoardStore = defineStore("BoardStore", () => {
   const boards: Ref<Board[] | undefined> = ref(undefined);
   function addBoard(board: Board) {
+    if (boards.value && boards.value?.length >= 10) {
+      return;
+    }
     boards.value = [];
     boards.value.push(board);
   }
