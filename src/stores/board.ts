@@ -22,5 +22,5 @@ export const useBoardStore = defineStore("BoardStore", () => {
   function getBoard(boardId: string) {
     return boards.value?.filter((board) => board.id === boardId);
   }
-  return { addBoard, deleteBoard, editBoard, getBoard };
+  return { boards, addBoard, deleteBoard, editBoard, getBoard };
 });
