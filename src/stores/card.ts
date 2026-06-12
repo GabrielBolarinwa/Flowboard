@@ -1,6 +1,7 @@
 import type { Card } from "@/types";
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { toast } from "vue-sonner";
 export const useCardStore = defineStore("CardStore", () => {
   const cards = ref<Record<string, Card>>({});
   function addCard(card: Card, colId: string) {
@@ -9,6 +10,7 @@ export const useCardStore = defineStore("CardStore", () => {
         (card) => card.columnId === colId,
       );
       if (cardsInBoard.length >= 50) {
+        toast.error("Card limit reached — maximum 50 cards per column");
         return;
       }
     }

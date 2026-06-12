@@ -1,6 +1,7 @@
 import type { Column } from "@/types";
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { toast } from "vue-sonner";
 export const useColumnStore = defineStore("ColumnStore", () => {
   const columns = ref<Record<string, Column>>({});
   function addColumn(column: Column, boardId: string) {
@@ -9,6 +10,14 @@ export const useColumnStore = defineStore("ColumnStore", () => {
         (col) => col.boardId === boardId,
       );
       if (columnsInBoard.length >= 6) {
+        toast.error("Column limit reached — maximum 6 columns per board");
+        return;
+      }
+      if (
+        columns.value[column.id].wipLimit &&
+        columnsInBoard.length >= columns.value[column.id].wipLimit!
+      ) {
+        toast.warning("WIP limit reached for this column");
         return;
       }
     }

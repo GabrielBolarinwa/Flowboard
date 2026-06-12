@@ -1,10 +1,12 @@
 import type { Board } from "@/types";
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { toast } from "vue-sonner";
 export const useBoardStore = defineStore("BoardStore", () => {
   const boards = ref<Record<string, Board>>({});
   function addBoard(board: Board) {
     if (boards.value && Object.keys(boards.value).length >= 10) {
+      toast.error("Board limit reached — maximum 10 boards");
       return;
     }
     boards.value[board.id] = board;
