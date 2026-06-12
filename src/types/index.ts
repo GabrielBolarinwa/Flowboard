@@ -1,7 +1,7 @@
 export interface Board {
   id: string;
   name: string;
-  description: string | null;
+  description: string | undefined;
   updatedAt: number;
 }
 
@@ -10,7 +10,7 @@ export interface Column {
   boardId: string;
   name: string;
   cardIds: string[];
-  wipLimit: number | null;
+  wipLimit: number | undefined;
 }
 
 export interface Card {
@@ -26,8 +26,8 @@ export interface Card {
     | "done"
     | "cancelled";
   priority: "low" | "medium" | "high";
-  dueDate: number | null;
-  assignee: string | null;
+  dueDate: number | undefined;
+  assignee: string | undefined;
   activity: ActivityEntry[];
 }
 

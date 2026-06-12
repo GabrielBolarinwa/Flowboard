@@ -3,5 +3,9 @@ import "./style.css";
 import App from "./App.vue";
 import { router } from "./router.ts";
 import { createPinia } from "pinia";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 
-createApp(App).use(createPinia()).use(router).mount("body");
+createApp(App)
+  .use(createPinia().use(piniaPluginPersistedstate))
+  .use(router)
+  .mount("body");
