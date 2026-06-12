@@ -36,7 +36,7 @@
           <li
             class="w-[80%] md:w-[45%] lg:w-[31.96%] bg-(--surface) p-6 rounded-lg flex flex-col gap-4 hover:-translate-y-0.5 border border-(--border) hover:border-(--border-focus)"
           >
-            <Board />
+            <BoardCard />
           </li>
         </ul>
         <NoBoards />
@@ -47,12 +47,12 @@
 </template>
 
 <script lang="ts" setup>
-import Board from "@/components/Board.vue";
 import NoSearch from "@/components/NoSearch.vue";
 import Input from "@/components/ui/input/Input.vue";
 import { Plus, Search } from "@lucide/vue";
 import { Transition } from "vue";
 import NoBoards from "@/components/NoBoards.vue";
+import BoardCard from "@/components/BoardCard.vue";
 </script>
 
 <style scoped>
