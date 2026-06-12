@@ -1,26 +1,22 @@
 import type { Board } from "@/types";
 import { defineStore } from "pinia";
-import { ref, type Ref } from "vue";
+import { ref } from "vue";
 export const useBoardStore = defineStore("BoardStore", () => {
-  const boards: Ref<Board[] | undefined> = ref(undefined);
+  const boards = ref<Record<string, Board>>({});
   function addBoard(board: Board) {
-    if (boards.value && boards.value?.length >= 10) {
+    if (boards.value && Object.keys(boards.value).length >= 10) {
       return;
     }
-    boards.value = [];
-    boards.value.push(board);
+    boards.value[board.id] = board;
   }
   function deleteBoard(boardId: string) {
-    boards.value = boards.value?.filter((board) => board.id !== boardId);
+    delete boards.value[boardId];
   }
   function editBoard(boardId: string, editedBoard: Board) {
-    let board = boards.value?.find((board) => board.id === boardId);
-    if (board) {
-      board = editedBoard;
-    }
+    boards.value[boardId] = editedBoard;
   }
   function getBoard(boardId: string) {
-    return boards.value?.filter((board) => board.id === boardId);
+    return boards.value[boardId];
   }
   return { boards, addBoard, deleteBoard, editBoard, getBoard };
 });

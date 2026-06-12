@@ -1,8 +1,8 @@
 import type { Column } from "@/types";
 import { defineStore } from "pinia";
-import { ref, type Ref } from "vue";
+import { ref } from "vue";
 export const useColumnStore = defineStore("ColumnStore", () => {
-  const columns: Ref<Column[] | undefined> = ref(undefined);
+  const columns = ref<Record<string, Column>>({});
   function addColumn(column: Column, boardId: string) {
     if (columns.value) {
       const columnsInBoard = Object.values(columns.value).filter(
@@ -12,20 +12,16 @@ export const useColumnStore = defineStore("ColumnStore", () => {
         return;
       }
     }
-    columns.value = [];
-    columns.value.push(column);
+    columns.value[column.id] = column;
   }
   function deleteColumn(columnId: string) {
-    columns.value = columns.value?.filter((column) => column.id !== columnId);
+    delete columns.value[columnId];
   }
   function editColumn(columnId: string, editedColumn: Column) {
-    let column = columns.value?.find((column) => column.id === columnId);
-    if (column) {
-      column = editedColumn;
-    }
+    columns.value[columnId] = editedColumn;
   }
   function getColumn(columnId: string) {
-    return columns.value?.filter((column) => column.id === columnId);
+    return columns.value[columnId];
   }
-  return { addColumn, deleteColumn, editColumn, getColumn };
+  return { columns, addColumn, deleteColumn, editColumn, getColumn };
 });

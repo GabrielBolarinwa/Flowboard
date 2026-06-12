@@ -35,9 +35,3 @@ interface ActivityEntry {
   message: string;
   timestamp: number;
 }
-
-export interface BoardState {
-  boards: Record<string, Board>;
-  columns: Record<string, Column>;
-  cards: Record<string, Card>;
-}

@@ -1,8 +1,8 @@
 import type { Card } from "@/types";
 import { defineStore } from "pinia";
-import { ref, type Ref } from "vue";
+import { ref } from "vue";
 export const useCardStore = defineStore("CardStore", () => {
-  const cards: Ref<Card[] | undefined> = ref(undefined);
+  const cards = ref<Record<string, Card>>({});
   function addCard(card: Card, colId: string) {
     if (cards.value) {
       const cardsInBoard = Object.values(cards.value).filter(
@@ -12,20 +12,16 @@ export const useCardStore = defineStore("CardStore", () => {
         return;
       }
     }
-    cards.value = [];
-    cards.value.push(card);
+    cards.value[card.id] = card;
   }
   function deleteCard(cardId: string) {
-    cards.value = cards.value?.filter((card) => card.id !== cardId);
+    delete cards.value[cardId];
   }
   function editCard(cardId: string, editedCard: Card) {
-    let card = cards.value?.find((card) => card.id === cardId);
-    if (card) {
-      card = editedCard;
-    }
+    cards.value[cardId] = editedCard;
   }
   function getCard(cardId: string) {
-    return cards.value?.filter((card) => card.id === cardId);
+    return cards.value[cardId];
   }
-  return { addCard, deleteCard, editCard, getCard };
+  return { cards, addCard, deleteCard, editCard, getCard };
 });
