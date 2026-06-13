@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { toTypedSchema } from "@vee-validate/zod";
 import { useForm } from "vee-validate";
+import { ref } from "vue";
 
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -20,43 +22,48 @@ import {
 import { Input } from "@/components/ui/input";
 import { boardSchema } from "@/schemas/board.ts";
 import { useBoardStore } from "@/stores/board.ts";
-import DialogClose from "./ui/dialog/DialogClose.vue";
-import Textarea from "./ui/textarea/Textarea.vue";
+import { Plus } from "@lucide/vue";
 
+const isOpen = ref(false);
 const boardFormSchema = toTypedSchema(boardSchema);
 
-const { editBoard, getBoard } = useBoardStore();
-const emit = defineEmits(["update:open"]);
-const { open, boardId } = defineProps<{
-  open: boolean;
-  boardId: string;
-}>();
-const board = getBoard(boardId);
+defineProps<{ trigger: string }>();
+const { addBoard } = useBoardStore();
 const { handleSubmit, defineField, errors } = useForm({
   validationSchema: boardFormSchema,
-  initialValues: {
-    name: board.name,
-    description: board.description,
-  },
 });
 const [name, nameAttrs] = defineField("name");
 const [description, descriptionAttrs] = defineField("description");
-
 const onSubmit = handleSubmit((values) => {
-  editBoard(boardId, values);
-  emit("update:open", false);
+  addBoard(values);
+  isOpen.value = false;
 });
 </script>
 
 <template>
-  <Dialog modal :open="open" @update:open="$emit('update:open', $event)">
+  <Button
+    @click="isOpen = true"
+    v-if="trigger === 'main_button'"
+    class="bg-(--accent) hover:bg-(--accent-hover) py-2! px-3! h-auto w-auto flex justify-center items-center gap-2 rounded-md"
+  >
+    <Plus /> New Board
+  </Button>
+  <Button
+    @click="isOpen = true"
+    v-if="trigger === 'secondary_button'"
+    variant="outline"
+    class="bg-(--accent-subtle) border border-(--border) hover:border-(--border-focus) py-1.5 px-3 flex justify-center items-center gap-2 rounded-md"
+  >
+    <Plus /> New Board
+  </Button>
+  <Dialog modal :open="isOpen" @update:open="isOpen = $event">
     <DialogContent
       class="max-w-130 m-0 px-0 bg-(--surface) border-(--border) border-2 radius-lg p-5"
     >
-      <DialogHeader>
-        <DialogTitle class="bold">Edit Board</DialogTitle>
+      <DialogHeader class="">
+        <DialogTitle class="bold">Add Board</DialogTitle>
         <DialogDescription class="text-(--muted) mt-2">
-          Edit Board name and description
+          Give your board a name and an optional description
         </DialogDescription>
       </DialogHeader>
 
@@ -114,7 +121,7 @@ const onSubmit = handleSubmit((values) => {
           type="submit"
           class="bg-(--accent) hover:bg-(--accent-hover) py-2! px-3! h-auto w-auto flex justify-center items-center gap-2 rounded-md"
           form="addBoardForm"
-          >Save Changes</Button
+          >Create Board</Button
         >
       </DialogFooter>
     </DialogContent>

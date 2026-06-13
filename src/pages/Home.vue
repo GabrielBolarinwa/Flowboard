@@ -50,10 +50,9 @@
 </template>
 
 <script lang="ts" setup>
-import AddBoard from "@/components/AddBoard.vue";
-import BoardCard from "@/components/BoardCard.vue";
-import NoBoards from "@/components/NoBoards.vue";
-import NoSearch from "@/components/NoSearch.vue";
+import AddBoard from "@/components/home/AddBoard.vue";
+import BoardCard from "@/components/home/BoardCard.vue";
+import NoSearch from "@/components/home/NoSearch.vue";
 import Input from "@/components/ui/input/Input.vue";
 import Separator from "@/components/ui/separator/Separator.vue";
 import { useBoardStore } from "@/stores/board";

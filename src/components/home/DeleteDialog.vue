@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import { CircleX, Trash2 } from "@lucide/vue";
-import AlertDialog from "./ui/alert-dialog/AlertDialog.vue";
-import AlertDialogAction from "./ui/alert-dialog/AlertDialogAction.vue";
-import AlertDialogCancel from "./ui/alert-dialog/AlertDialogCancel.vue";
-import AlertDialogContent from "./ui/alert-dialog/AlertDialogContent.vue";
-import AlertDialogDescription from "./ui/alert-dialog/AlertDialogDescription.vue";
-import AlertDialogFooter from "./ui/alert-dialog/AlertDialogFooter.vue";
-import AlertDialogHeader from "./ui/alert-dialog/AlertDialogHeader.vue";
-import AlertDialogTitle from "./ui/alert-dialog/AlertDialogTitle.vue";
 import { useBoardStore } from "@/stores/board.ts";
+import AlertDialog from "../ui/alert-dialog/AlertDialog.vue";
+import AlertDialogContent from "../ui/alert-dialog/AlertDialogContent.vue";
+import AlertDialogHeader from "../ui/alert-dialog/AlertDialogHeader.vue";
+import AlertDialogTitle from "../ui/alert-dialog/AlertDialogTitle.vue";
+import AlertDialogFooter from "../ui/alert-dialog/AlertDialogFooter.vue";
 
 defineProps(["open", "boardId"]);
 defineEmits(["update:open"]);

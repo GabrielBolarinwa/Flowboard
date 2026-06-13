@@ -35,10 +35,8 @@ const { board } = defineProps<{
   board: Board;
 }>();
 
-const { columns } = useColumnStore();
-const columnCount = Object.values(columns).filter(
-  (c) => c.boardId === board.id,
-).length;
+const { getColumnCount } = useColumnStore();
+const columnCount = getColumnCount(board.id);
 </script>
 
 <style></style>
