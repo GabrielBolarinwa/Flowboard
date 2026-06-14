@@ -18,6 +18,7 @@ export const useBoardStore = defineStore(
         id: nanoid(),
         name: boardFormValues.name,
         description: boardFormValues.description || "",
+        columnIds: [],
         updatedAt: Date.now(),
       };
       boards.value[board.id] = board;
