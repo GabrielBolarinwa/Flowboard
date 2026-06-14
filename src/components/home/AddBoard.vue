@@ -23,6 +23,7 @@ import { Input } from "@/components/ui/input";
 import { boardSchema } from "@/schemas/board.ts";
 import { useBoardStore } from "@/stores/board.ts";
 import { Plus } from "@lucide/vue";
+import Textarea from "../ui/textarea/Textarea.vue";
 
 const isOpen = ref(false);
 const boardFormSchema = toTypedSchema(boardSchema);

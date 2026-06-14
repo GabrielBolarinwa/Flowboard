@@ -53,6 +53,7 @@
 import AddBoard from "@/components/home/AddBoard.vue";
 import BoardCard from "@/components/home/BoardCard.vue";
 import NoSearch from "@/components/home/NoSearch.vue";
+import NoBoards from "@/components/home/NoBoards.vue";
 import Input from "@/components/ui/input/Input.vue";
 import Separator from "@/components/ui/separator/Separator.vue";
 import { useBoardStore } from "@/stores/board";

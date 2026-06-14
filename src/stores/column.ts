@@ -37,6 +37,10 @@ export const useColumnStore = defineStore(
     function getColumn(columnId: string) {
       return columns.value[columnId];
     }
+    function getColumnCount(boardId: string) {
+      return Object.values(columns.value).filter((c) => c.boardId === boardId)
+        .length;
+    }
 
     return {
       columns,
@@ -44,6 +48,7 @@ export const useColumnStore = defineStore(
       deleteColumn,
       editColumn,
       getColumn,
+      getColumnCount,
     };
   },
   { persist: true },

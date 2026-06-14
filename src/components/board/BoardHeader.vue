@@ -29,21 +29,16 @@ import { storeToRefs } from "pinia";
 import { computed } from "vue";
 import Button from "../ui/button/Button.vue";
 import AddColumnPopover from "./AddColumnPopover.vue";
+import { useCardStore } from "@/stores/card.ts";
 
 const { boardId } = defineProps<{ boardId: string }>();
 
 const { boards } = storeToRefs(useBoardStore());
 const board = boards.value[boardId];
-const { columns } = storeToRefs(useColumnStore());
-const columnCount = computed(
-  () =>
-    Object.values(columns.value).filter((c) => c.boardId === boardId).length,
-);
-const cardCount = computed(() =>
-  Object.values(columns.value)
-    .filter((col) => col.boardId === boardId)
-    .reduce((total, col) => total + col.cardIds.length, 0),
-);
+const { getColumnCount } = useColumnStore();
+const { getCardCount } = useCardStore();
+const columnCount = computed(() => getColumnCount(boardId));
+const cardCount = computed(() => getCardCount(boardId));
 </script>
 
 <style></style>
