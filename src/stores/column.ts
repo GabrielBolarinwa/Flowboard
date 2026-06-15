@@ -1,12 +1,14 @@
 import type { Column } from "@/types";
 import { nanoid } from "nanoid";
-import { defineStore } from "pinia";
+import { defineStore, storeToRefs } from "pinia";
 import { ref } from "vue";
 import { toast } from "vue-sonner";
+import { useBoardStore } from "./board";
 export const useColumnStore = defineStore(
   "ColumnStore",
   () => {
     const columns = ref<Record<string, Column>>({});
+    const { boards } = storeToRefs(useBoardStore());
     function addColumn(columnFormValue: { name: string }, boardId: string) {
       const column: Column = {
         id: nanoid(Math.round(15.75)),
@@ -26,6 +28,8 @@ export const useColumnStore = defineStore(
       }
 
       columns.value[column.id] = column;
+
+      boards.value[boardId].columnIds.push(column.id);
       toast.success("Column was successfully created");
     }
     function deleteColumn(columnId: string) {
