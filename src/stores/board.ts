@@ -2,13 +2,15 @@ import { router } from "@/router";
 import type { Board } from "@/types";
 import getObjectLength from "@/utils/getObjectLength";
 import { nanoid } from "nanoid";
-import { defineStore } from "pinia";
+import { defineStore, storeToRefs } from "pinia";
 import { ref } from "vue";
 import { toast } from "vue-sonner";
+import { useColumnStore } from "./column";
 export const useBoardStore = defineStore(
   "BoardStore",
   () => {
     const boards = ref<Record<string, Board>>({});
+    const { columns } = storeToRefs(useColumnStore());
     function addBoard(boardFormValues: { name: string; description?: string }) {
       if (boards.value && getObjectLength(boards.value) >= 10) {
         toast.error("Board limit reached — maximum 10 boards");
@@ -28,6 +30,9 @@ export const useBoardStore = defineStore(
       }, 500);
     }
     function deleteBoard(boardId: string) {
+      const board = boards.value[boardId];
+      if (!board) return;
+      board.columnIds.forEach((columnId) => delete columns.value[columnId]);
       delete boards.value[boardId];
     }
     function editBoard(
@@ -36,6 +41,7 @@ export const useBoardStore = defineStore(
     ) {
       const boardToEdit = boards.value[boardId];
       boards.value[boardId] = { ...boardToEdit, ...editedBoard };
+      boards.value[boardId].updatedAt = Date.now();
     }
     function getBoard(boardId: string) {
       return boards.value[boardId];
