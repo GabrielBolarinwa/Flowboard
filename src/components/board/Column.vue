@@ -10,7 +10,7 @@
       <Button class="w-auto h-auto rounded-full p-1.5! hover:bg-(--surface)"
         ><Plus
       /></Button>
-      <EditColumnPopover :boardId="boardId" :columnId="column.id" />
+      <EditColumnPopover :columnId="column.id" />
       <Button class="w-auto h-auto rounded-full p-1.5! hover:bg-(--surface)"
         ><Trash2
       /></Button>
@@ -23,7 +23,7 @@
   </ul>
   <NoCards v-else-if="cards.length === 0" />
   <Button
-    class="p-3 border-(--border) border-dashed border rounded-md justify-start text-sm! font-medium text-(--muted) py-2 px-3 items-center gap-2 w-full hover:border-(--border-focus) text-(--secondary) transition-[0.15s]"
+    class="p-3 border-(--border) border-dashed border rounded-md justify-start text-sm! font-medium py-2 px-3 items-center gap-2 w-full hover:border-(--border-focus) text-(--secondary) transition-[0.15s]"
   >
     <Plus /> Add Card
   </Button>

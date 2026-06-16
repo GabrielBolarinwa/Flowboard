@@ -35,8 +35,15 @@ export const useColumnStore = defineStore(
     function deleteColumn(columnId: string) {
       delete columns.value[columnId];
     }
-    function editColumn(columnId: string, editedColumn: Column) {
-      columns.value[columnId] = editedColumn;
+    function editColumn(
+      columnId: string,
+      editedColumn: { name: string; wipLimit: number | null },
+    ) {
+      const initialColumn = columns.value[columnId];
+      columns.value[columnId] = {
+        ...initialColumn,
+        ...editedColumn,
+      };
     }
     function getColumn(columnId: string) {
       return columns.value[columnId];
