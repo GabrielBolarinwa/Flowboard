@@ -11,7 +11,7 @@ export interface Column {
   boardId: string;
   name: string;
   cardIds: string[];
-  wipLimit: number | undefined;
+  wipLimit: number | null;
 }
 
 export interface Card {

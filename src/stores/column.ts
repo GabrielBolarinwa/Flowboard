@@ -15,7 +15,7 @@ export const useColumnStore = defineStore(
         name: columnFormValue.name,
         boardId: boardId,
         cardIds: [],
-        wipLimit: undefined,
+        wipLimit: null,
       };
       if (columns.value) {
         const columnsInBoard = Object.values(columns.value).filter(
