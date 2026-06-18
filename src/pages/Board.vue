@@ -5,7 +5,7 @@
       <ul v-if="columns.length > 0" class="flex gap-5">
         <li
           v-for="column in columns"
-          class="bg-(--surface-2) rounded-lg p-4 flex w-[312px] justify-between flex-col min-h-[96px] gap-6"
+          class="bg-(--surface-2) rounded-lg p-4 flex w-78 justify-between flex-col min-h-[96px] gap-6"
         >
           <Column :column="column" :boardId="boardId" />
         </li>
@@ -24,12 +24,12 @@ import { computed } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-const boardId = computed(() => route.params.boardId as string);
-const { getBoard } = useBoardStore();
-const board = getBoard(boardId.value);
+const boardId = route.params.boardId as string;
+const { boards } = storeToRefs(useBoardStore());
+const board = computed(() => boards.value[boardId]);
 const { columns: storeColumns } = storeToRefs(useColumnStore());
 const columns = computed(() =>
-  board.columnIds.map((id) => storeColumns.value[id]),
+  board.value.columnIds.map((id) => storeColumns.value[id]),
 );
 </script>
 
