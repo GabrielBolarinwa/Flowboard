@@ -12,8 +12,8 @@
     </div>
     <div class="flex gap-4">
       <Button
-        class="flex gap-3.5 text-(--secondary) border-(--border)"
-        variant="outline"
+        class="flex gap-3.5 text-(--secondary) border-(--border) border"
+        variant="ghost"
         ><Download /> Export</Button
       >
       <AddColumnPopover :boardId="boardId" />

@@ -37,8 +37,13 @@ const { deleteColumn } = useColumnStore();
         >
       </AlertDialogHeader>
       <AlertDialogFooter>
-        <AlertDialogCancel class="border-(--border) hover:bg-(--border)/30"
-          ><CircleX /> Cancel</AlertDialogCancel
+        <AlertDialogCancel as-child
+          ><Button
+            variant="ghost"
+            class="border-(--border) hover:bg-(--border)/30"
+          >
+            <CircleX /> Cancel
+          </Button></AlertDialogCancel
         >
         <AlertDialogAction
           class="border-(--border) bg-destructive hover:bg-destructive-hover"
