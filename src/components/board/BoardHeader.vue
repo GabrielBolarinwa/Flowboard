@@ -6,7 +6,7 @@
       <h1>{{ board.name }}</h1>
       <p class="flex gap-3 items-center font-mono text-xs text-(--muted)">
         <span>{{ columnCount > 0 ? columnCount : "No" }} columns</span>∙<span
-          >{{ cardCount > 0 ? columnCount : "No" }} cards</span
+          >{{ cardCount > 0 ? cardCount : "No" }} cards</span
         >
       </p>
     </div>
