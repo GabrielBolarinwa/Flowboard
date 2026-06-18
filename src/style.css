@@ -167,4 +167,8 @@
   textarea {
     @apply text-[length:inherit]! h-auto!;
   }
+  [data-slot="alert-dialog-content"],
+  [data-slot="dialog-content"] {
+    @apply pointer-events-auto!;
+  }
 }
