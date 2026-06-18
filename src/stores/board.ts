@@ -1,5 +1,5 @@
 import { router } from "@/router";
-import type { Board } from "@/types";
+import type { Board, BoardFormValue } from "@/types";
 import getObjectLength from "@/utils/getObjectLength";
 import { nanoid } from "nanoid";
 import { defineStore, storeToRefs } from "pinia";
@@ -11,7 +11,7 @@ export const useBoardStore = defineStore(
   () => {
     const boards = ref<Record<string, Board>>({});
     const { columns } = storeToRefs(useColumnStore());
-    function addBoard(boardFormValues: { name: string; description?: string }) {
+    function addBoard(boardFormValues: BoardFormValue) {
       if (boards.value && getObjectLength(boards.value) >= 10) {
         toast.error("Board limit reached — maximum 10 boards");
         return;

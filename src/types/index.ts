@@ -18,7 +18,35 @@ export interface Card {
   id: string;
   columnId: string;
   title: string;
-  description: string;
+  description?: string | undefined;
+  status:
+    | "todo"
+    | "in-progress"
+    | "in-review"
+    | "blocked"
+    | "done"
+    | "cancelled";
+  priority?: "low" | "medium" | "high";
+  dueDate?: string | undefined;
+  assignee?: string | undefined;
+  activity: ActivityEntry[];
+}
+
+interface ActivityEntry {
+  message: string;
+  timestamp: number;
+}
+
+export interface BoardFormValue {
+  name: string;
+  description?: string;
+}
+export interface ColumnFormValue {
+  name: string;
+}
+
+export interface CardFormValue {
+  title: string;
   status:
     | "todo"
     | "in-progress"
@@ -27,12 +55,7 @@ export interface Card {
     | "done"
     | "cancelled";
   priority: "low" | "medium" | "high";
-  dueDate: number | undefined;
-  assignee: string | undefined;
-  activity: ActivityEntry[];
-}
-
-interface ActivityEntry {
-  message: string;
-  timestamp: number;
+  description?: string | undefined;
+  assignee?: string | undefined;
+  dueDate?: string | undefined;
 }

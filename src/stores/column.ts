@@ -1,15 +1,17 @@
-import type { Column } from "@/types";
+import type { Column, ColumnFormValue } from "@/types";
 import { nanoid } from "nanoid";
 import { defineStore, storeToRefs } from "pinia";
 import { ref } from "vue";
 import { toast } from "vue-sonner";
 import { useBoardStore } from "./board";
+import { useCardStore } from "./card";
 export const useColumnStore = defineStore(
   "ColumnStore",
   () => {
     const columns = ref<Record<string, Column>>({});
-    const { boards } = storeToRefs(useBoardStore());
-    function addColumn(columnFormValue: { name: string }, boardId: string) {
+    function addColumn(columnFormValue: ColumnFormValue, boardId: string) {
+      const { boards } = storeToRefs(useBoardStore());
+
       const column: Column = {
         id: nanoid(Math.round(15.75)),
         name: columnFormValue.name,
@@ -30,20 +32,34 @@ export const useColumnStore = defineStore(
       columns.value[column.id] = column;
 
       boards.value[boardId].columnIds.push(column.id);
+      boards.value[boardId].updatedAt = Date.now();
       toast.success("Column was successfully created");
     }
     function deleteColumn(columnId: string) {
+      const { boards } = storeToRefs(useBoardStore());
+      const { cards } = storeToRefs(useCardStore());
+
+      const column = columns.value[columnId];
+      if (!column) return;
+      column.cardIds.forEach((cardId) => delete cards.value[cardId]);
+      boards.value[column.boardId].columnIds = boards.value[
+        column.boardId
+      ].columnIds.filter((id) => id !== columnId);
       delete columns.value[columnId];
+      boards.value[column.boardId].updatedAt = Date.now();
     }
     function editColumn(
       columnId: string,
       editedColumn: { name: string; wipLimit: number | null },
     ) {
-      const initialColumn = columns.value[columnId];
+      const { boards } = storeToRefs(useBoardStore());
+
+      const column = columns.value[columnId];
       columns.value[columnId] = {
-        ...initialColumn,
+        ...column,
         ...editedColumn,
       };
+      boards.value[column.boardId].updatedAt = Date.now();
     }
     function getColumn(columnId: string) {
       return columns.value[columnId];
