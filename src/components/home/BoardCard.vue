@@ -4,7 +4,7 @@
   <div class="p-4 bg-(--accent-subtle) w-12.5 h-12.5 rounded-md">
     <KanbanSquare :size="18" />
   </div>
-  <h4>{{ board.name }}</h4>
+  <h4 class="font-bold">{{ board.name }}</h4>
   <p class="text-sm text-(--secondary)">
     {{ board.description }}
   </p>

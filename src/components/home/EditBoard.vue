@@ -21,6 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { boardSchema } from "@/schemas/board.ts";
 import { useBoardStore } from "@/stores/board.ts";
+import Textarea from "../ui/textarea/Textarea.vue";
 
 const boardFormSchema = toTypedSchema(boardSchema);
 

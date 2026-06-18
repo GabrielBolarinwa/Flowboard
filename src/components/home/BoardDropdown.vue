@@ -41,6 +41,7 @@ import DropdownMenuLabel from "../ui/dropdown-menu/DropdownMenuLabel.vue";
 import DropdownMenuSeparator from "../ui/dropdown-menu/DropdownMenuSeparator.vue";
 import DropdownMenuGroup from "../ui/dropdown-menu/DropdownMenuGroup.vue";
 import DropdownMenuItem from "../ui/dropdown-menu/DropdownMenuItem.vue";
+import Button from "../ui/button/Button.vue";
 
 const isAlertOpen = ref(false);
 const isDialogOpen = ref(false);
