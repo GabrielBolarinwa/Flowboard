@@ -33,11 +33,12 @@ const { handleSubmit, defineField, errors } = useForm({
 const [name, nameAttrs] = defineField("name");
 const [wipLimit, wipLimitAttrs] = defineField("wipLimit");
 const wipLimitField = wipLimit as Ref<number>;
-const wipEnabled = ref(false);
+const wipEnabled = ref(column.wipLimit ? true : false);
 const onSubmit = handleSubmit((values) => {
   const editedColumn = {
     name: values.name,
-    wipLimit: values.wipLimit === "" ? null : values.wipLimit,
+    wipLimit:
+      values.wipLimit === "" || !wipEnabled.value ? null : values.wipLimit,
   };
   editColumn(columnId, editedColumn);
   isOpen.value = false;
