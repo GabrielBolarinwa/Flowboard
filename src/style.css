@@ -82,6 +82,10 @@
     --cancelled-text: #78716c;
     --cancelled-border: #d6cfc7;
     --cancelled-dot: #aba29e;
+    --blocked-dot: #fb7185;
+    --blocked-border: #9f1239;
+    --blocked-text: #fda4af;
+    --blocked-bg: #200d10;
     --shadow-card:
       0 1px 3px rgba(28, 24, 20, 0.06), 0 1px 2px rgba(28, 24, 20, 0.04);
     --shadow-card-hover:
