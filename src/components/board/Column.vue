@@ -25,7 +25,7 @@
   </div>
   <ul class="mt-4" v-if="cards.length > 0">
     <li v-for="card in cards">
-      {{ card.title }}
+      <Card :card="card" />
     </li>
   </ul>
   <NoCards v-else-if="cards.length === 0" />
@@ -46,6 +46,7 @@ import NoCards from "./NoCards.vue";
 import CardDetail from "../CardDetail.vue";
 import { ref } from "vue";
 import QuickAddCard from "./QuickAddCard.vue";
+import Card from "./Card.vue";
 const { column, boardId } = defineProps<{ column: Column; boardId: string }>();
 const { cards: storeCards } = storeToRefs(useCardStore());
 const cards = computed(() => column.cardIds.map((id) => storeCards.value[id]));
