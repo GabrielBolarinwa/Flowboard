@@ -32,6 +32,8 @@ import { useCardStore } from "@/stores/card.ts";
 import { Save } from "@lucide/vue";
 import { storeToRefs } from "pinia";
 import CardDeleteDialog from "./CardDeleteDialog.vue";
+import ScrollArea from "../ui/scroll-area/ScrollArea.vue";
+import timeAgo from "@/utils/timeAgo.ts";
 
 const cardFormSchema = toTypedSchema(cardSchema);
 
@@ -84,10 +86,13 @@ const today = new Date().toISOString().split("T")[0];
 
 <template>
   <DialogContent
-    class="max-w-130 m-0 px-0 bg-(--surface) border-(--border) border-2 radius-lg p-5 max-h-[90dvh] overflow-y-auto"
+    class="max-w-130 m-0 px-0 bg-(--surface) border-(--border) border-2 rounded-lg p-5 max-h-[90dvh] overflow-y-auto"
   >
     <DialogHeader class="">
-      <DialogTitle class="bold">Add Card</DialogTitle>
+      <DialogTitle class="font-bold"
+        ><span v-if="mode === 'create'">Add Card</span
+        ><span v-if="mode === 'edit'">Card Details</span></DialogTitle
+      >
       <DialogDescription class="text-(--muted) mt-2">
         <span v-if="mode === 'create'"
           >Give your card a title and an optional description</span
@@ -263,6 +268,22 @@ const today = new Date().toISOString().split("T")[0];
         </Field>
       </FieldGroup>
     </form>
+    <div v-if="mode === 'edit'">
+      <p
+        class="uppercase font-mono tracking-wide text-sm font-medium text-(--secondary) mb-3"
+      >
+        Activity Log
+      </p>
+      <ul
+        class="bg-(--bg) border-(--border) py-3 px-4 font-mono text-sm rounded-lg"
+      >
+        <ScrollArea class="h-[20vh]">
+          <li v-for="activity in card?.activity">
+            {{ activity.message }}, {{ timeAgo(activity.timestamp) }}
+          </li>
+        </ScrollArea>
+      </ul>
+    </div>
     <hr class="border-(--border)" />
     <DialogFooter class="py-3 px-5 gap-3">
       <DialogClose as-child v-if="mode === 'create'">

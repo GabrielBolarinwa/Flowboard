@@ -61,6 +61,10 @@ export const useCardStore = defineStore(
       const editedCard: Card = {
         ...initialCard,
         ...cardFormValue,
+        activity: [
+          ...initialCard.activity,
+          { message: `Edited card data`, timestamp: Date.now() },
+        ],
       };
       cards.value[cardId] = editedCard;
       boards.value[columns.value[initialCard.columnId]?.boardId].updatedAt =
@@ -73,6 +77,13 @@ export const useCardStore = defineStore(
       const editedCard: Card = {
         ...initialCard,
         title,
+        activity: [
+          ...initialCard.activity,
+          {
+            message: `Changed title from ${initialCard.title} to ${title}`,
+            timestamp: Date.now(),
+          },
+        ],
       };
       cards.value[cardId] = editedCard;
       boards.value[columns.value[initialCard.columnId]?.boardId].updatedAt =

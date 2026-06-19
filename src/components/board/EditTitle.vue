@@ -14,7 +14,8 @@
       v-model="cardTitle"
       :value="cardTitle"
       @keydown.esc="emits('closeInput')"
-      @keydown.enter="onSubmit"
+      @keydown.stop.enter="onSubmit"
+      @keydown.space.stop
       @blur="onSubmit"
     />
   </form>
