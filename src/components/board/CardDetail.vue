@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { toTypedSchema } from "@vee-validate/zod";
 import { useForm } from "vee-validate";
-import { computed } from "vue";
+import { computed, toRefs } from "vue";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -19,32 +19,33 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import Select from "@/components/ui/select/Select.vue";
+import SelectContent from "@/components/ui/select/SelectContent.vue";
+import SelectGroup from "@/components/ui/select/SelectGroup.vue";
+import SelectItem from "@/components/ui/select/SelectItem.vue";
+import SelectLabel from "@/components/ui/select/SelectLabel.vue";
+import SelectTrigger from "@/components/ui/select/SelectTrigger.vue";
+import SelectValue from "@/components/ui/select/SelectValue.vue";
+import Textarea from "@/components/ui/textarea/Textarea.vue";
 import { cardSchema } from "@/schemas/card.ts";
 import { useCardStore } from "@/stores/card.ts";
-import { Save } from "@lucide/vue";
+import { Save, Trash2 } from "@lucide/vue";
 import { storeToRefs } from "pinia";
-import Select from "./ui/select/Select.vue";
-import SelectContent from "./ui/select/SelectContent.vue";
-import SelectGroup from "./ui/select/SelectGroup.vue";
-import SelectItem from "./ui/select/SelectItem.vue";
-import SelectLabel from "./ui/select/SelectLabel.vue";
-import SelectTrigger from "./ui/select/SelectTrigger.vue";
-import SelectValue from "./ui/select/SelectValue.vue";
-import Textarea from "./ui/textarea/Textarea.vue";
 
 const cardFormSchema = toTypedSchema(cardSchema);
 
-const { mode, cardId, columnId, boardId } = defineProps<{
+const props = defineProps<{
   mode: "create" | "edit";
   columnId: string;
   cardId?: string;
   boardId: string;
 }>();
+const { mode, cardId, columnId, boardId } = toRefs(props);
 const emit = defineEmits<{ close: [] }>();
 const { addCard, editCard } = useCardStore();
 const { cards } = storeToRefs(useCardStore());
 const card = computed(() =>
-  mode === "edit" && cardId ? cards.value[cardId] : null,
+  mode.value === "edit" && cardId.value ? cards.value[cardId.value] : null,
 );
 const { handleSubmit, defineField, errors } = useForm({
   validationSchema: cardFormSchema,
@@ -68,10 +69,10 @@ const [dueDate, dueDateAttrs] = defineField("dueDate");
 const [status, statusAttrs] = defineField("status");
 const [priority, priorityAttrs] = defineField("priority");
 const onSubmit = handleSubmit((values) => {
-  if (mode === "create") {
-    addCard(values, columnId, boardId);
+  if (mode.value === "create") {
+    addCard(values, columnId.value, boardId.value);
   }
-  if (mode === "edit" && card.value) {
+  if (mode.value === "edit" && card.value) {
     editCard(card.value.id, values);
   }
   emit("close");
@@ -94,7 +95,7 @@ const today = new Date().toISOString().split("T")[0];
       </DialogDescription>
     </DialogHeader>
 
-    <form id="addCardForm" @submit.prevent="onSubmit" class="mt-4">
+    <form id="cardForm" @submit.prevent="onSubmit" class="mt-4">
       <FieldGroup class="gap-4">
         <Field :data-invalid="!!errors.title">
           <FieldLabel
@@ -263,7 +264,7 @@ const today = new Date().toISOString().split("T")[0];
     </form>
     <hr class="border-(--border)" />
     <DialogFooter class="py-3 px-5 gap-3">
-      <DialogClose as-child>
+      <DialogClose as-child v-if="mode === 'create'">
         <Button
           type="button"
           variant="secondary"
@@ -273,9 +274,17 @@ const today = new Date().toISOString().split("T")[0];
         </Button>
       </DialogClose>
       <Button
+        type="button"
+        variant="destructive"
+        class="border border-(--border) bg-destructive hover:bg-destructive-hover"
+        v-if="mode === 'edit'"
+      >
+        <Trash2 /> Delete
+      </Button>
+      <Button
         type="submit"
         class="bg-(--accent) hover:bg-(--accent-hover) py-2! px-3! h-auto w-auto flex justify-center items-center gap-2 rounded-md"
-        form="addCardForm"
+        form="cardForm"
         ><span v-if="mode === 'create'">Create Card</span
         ><span v-else-if="mode === 'edit'" class="flex gap-2 items-center"
           ><Save /> Save

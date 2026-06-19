@@ -40,7 +40,7 @@
     <CardDetail
       v-if="open"
       :open="open"
-      mode="edit"
+      :mode="dialogMode"
       :columnId="column.id"
       :boardId="boardId"
       :cardId="activeCardId"
@@ -60,7 +60,7 @@ import Button from "../ui/button/Button.vue";
 import DeleteColumnDialog from "./DeleteColumnDialog.vue";
 import EditColumnPopover from "./EditColumnPopover.vue";
 import NoCards from "./NoCards.vue";
-import CardDetail from "../CardDetail.vue";
+import CardDetail from "./CardDetail.vue";
 import { ref } from "vue";
 import QuickAddCard from "./QuickAddCard.vue";
 import Card from "./Card.vue";
@@ -72,18 +72,18 @@ const cards = computed(() => column.cardIds.map((id) => storeCards.value[id]));
 const cardCount = computed(() => column.cardIds.length ?? 0);
 
 const open = ref(false);
-const dialogMode = ref("");
+const dialogMode = ref<"create" | "edit">("create");
 const activeCardId = ref<string | undefined>(undefined);
 
 function createDialogOpen() {
-  open.value = true;
   dialogMode.value = "create";
+  open.value = true;
 }
 
 function editDialogOpen(cardId: string) {
-  open.value = true;
   dialogMode.value = "edit";
   activeCardId.value = cardId;
+  open.value = true;
 }
 
 function onDialogOpenChange(currentOpen: boolean) {
