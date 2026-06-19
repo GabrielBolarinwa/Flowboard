@@ -18,7 +18,7 @@
       >
       <p
         class="font-semibold text-sm leading-snug mt-2 cursor-text select-none"
-        @click="editingTitle = true"
+        @click.stop="editingTitle = true"
         v-if="!editingTitle"
       >
         {{ card.title }}
