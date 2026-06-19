@@ -60,7 +60,7 @@ import { statusColorVariableMap, statusTextMap } from "@/constants";
 import type { Card } from "@/types";
 import { Calendar, GripVertical } from "@lucide/vue";
 import Badge from "../ui/badge/Badge.vue";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import EditTitle from "./EditTitle.vue";
 const editingTitle = ref(false);
 
@@ -72,11 +72,13 @@ const dueDate =
     month: "short",
     day: "numeric",
   });
-const avatar = card.assignee
-  ?.split(" ")
-  .map((n) => n[0])
-  .join("")
-  .slice(0, 2);
+const avatar = computed(() =>
+  card.assignee
+    ?.split(" ")
+    .map((n) => n[0])
+    .join("")
+    .slice(0, 2),
+);
 const statusVariablePrefix = statusColorVariableMap[card.status];
 </script>
 

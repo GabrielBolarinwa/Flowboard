@@ -10,17 +10,11 @@
         >{{ cardCount }}</Badge
       >
       <Button
-        @click="isOpen = true"
+        @click="createDialogOpen"
         class="w-auto h-auto rounded-full p-1.5! hover:bg-(--surface)"
       >
         <Plus />
       </Button>
-      <CardDetail
-        mode="create"
-        :columnId="column.id"
-        :boardId="boardId"
-        :open="isOpen"
-      />
       <EditColumnPopover :columnId="column.id" />
       <DeleteColumnDialog :columnId="column.id" />
     </div>
@@ -29,7 +23,12 @@
     <ul class="flex flex-col gap-2">
       <li
         v-for="card in cards"
-        class="flex bg-(--surface) border-(--border) rounded-lg shadow-card border p-4 flex-col"
+        class="flex bg-(--surface) border-(--border) rounded-lg shadow-card border p-4 flex-col hover:-translate-y-px hover:shadow-(--shadow-card-hover) cursor-pointer"
+        :tabindex="0"
+        @click="editDialogOpen(card.id)"
+        @keydown.enter="editDialogOpen(card.id)"
+        @keydown.space.prevent="editDialogOpen(card.id)"
+        :aria-label="`${card.title} ${card.status}, select for more details`"
       >
         <Card :card="card" />
       </li>
@@ -37,6 +36,17 @@
   </ScrollArea>
   <NoCards v-else-if="cards.length === 0" />
   <QuickAddCard :columnId="column.id" :boardId="boardId" />
+  <Dialog modal :open="open" @update:open="onDialogOpenChange">
+    <CardDetail
+      v-if="open"
+      :open="open"
+      mode="edit"
+      :columnId="column.id"
+      :boardId="boardId"
+      :cardId="activeCardId"
+      @close="open = false"
+    />
+  </Dialog>
 </template>
 
 <script lang="ts" setup>
@@ -55,11 +65,33 @@ import { ref } from "vue";
 import QuickAddCard from "./QuickAddCard.vue";
 import Card from "./Card.vue";
 import ScrollArea from "../ui/scroll-area/ScrollArea.vue";
+import Dialog from "../ui/dialog/Dialog.vue";
 const { column, boardId } = defineProps<{ column: Column; boardId: string }>();
 const { cards: storeCards } = storeToRefs(useCardStore());
 const cards = computed(() => column.cardIds.map((id) => storeCards.value[id]));
 const cardCount = computed(() => column.cardIds.length ?? 0);
-const isOpen = ref(false);
+
+const open = ref(false);
+const dialogMode = ref("");
+const activeCardId = ref<string | undefined>(undefined);
+
+function createDialogOpen() {
+  open.value = true;
+  dialogMode.value = "create";
+}
+
+function editDialogOpen(cardId: string) {
+  open.value = true;
+  dialogMode.value = "edit";
+  activeCardId.value = cardId;
+}
+
+function onDialogOpenChange(currentOpen: boolean) {
+  open.value = currentOpen;
+  if (!currentOpen) {
+    activeCardId.value = undefined;
+  }
+}
 </script>
 
 <style></style>

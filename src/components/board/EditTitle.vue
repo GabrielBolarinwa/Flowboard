@@ -15,8 +15,7 @@
     />
     <Button
       class="bg-(--surface) px-3 py-1 w-auto border border-(--border)"
-      :type="cardTitle.length > 0 ? `submit` : `button`"
-      @click="cardTitle.length <= 0 && emits('closeInput')"
+      type="submit"
       ><ArrowRight v-if="cardTitle.length > 0" /> <X v-else />
     </Button>
   </form>
@@ -38,6 +37,10 @@ const cardTitle = ref(cards.value[cardId].title);
 
 const emits = defineEmits(["closeInput"]);
 function onSubmit() {
+  if (cardTitle.value.length <= 0) {
+    emits("closeInput");
+    return;
+  }
   titleCardEdit(cardId, cardTitle.value);
   emits("closeInput");
 }
