@@ -29,8 +29,9 @@ import SelectValue from "@/components/ui/select/SelectValue.vue";
 import Textarea from "@/components/ui/textarea/Textarea.vue";
 import { cardSchema } from "@/schemas/card.ts";
 import { useCardStore } from "@/stores/card.ts";
-import { Save, Trash2 } from "@lucide/vue";
+import { Save } from "@lucide/vue";
 import { storeToRefs } from "pinia";
+import CardDeleteDialog from "./CardDeleteDialog.vue";
 
 const cardFormSchema = toTypedSchema(cardSchema);
 
@@ -273,14 +274,11 @@ const today = new Date().toISOString().split("T")[0];
           Cancel
         </Button>
       </DialogClose>
-      <Button
-        type="button"
-        variant="destructive"
-        class="border border-(--border) bg-destructive hover:bg-destructive-hover"
+      <CardDeleteDialog
+        :cardId="cardId"
         v-if="mode === 'edit'"
-      >
-        <Trash2 /> Delete
-      </Button>
+        @close="emit('close')"
+      />
       <Button
         type="submit"
         class="bg-(--accent) hover:bg-(--accent-hover) py-2! px-3! h-auto w-auto flex justify-center items-center gap-2 rounded-md"

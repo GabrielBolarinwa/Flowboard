@@ -43,23 +43,40 @@ export const useCardStore = defineStore(
       boards.value[boardId].updatedAt = Date.now();
     }
     function deleteCard(cardId: string) {
+      const { boards } = storeToRefs(useBoardStore());
+      const { columns } = storeToRefs(useColumnStore());
+      const card = cards.value[cardId];
+      if (!card) return;
+      columns.value[card.columnId].cardIds = columns.value[
+        card.columnId
+      ].cardIds.filter((id) => id !== cardId);
       delete cards.value[cardId];
+      boards.value[columns.value[card.columnId]?.boardId].updatedAt =
+        Date.now();
     }
     function editCard(cardId: string, cardFormValue: CardFormValue) {
+      const { boards } = storeToRefs(useBoardStore());
+      const { columns } = storeToRefs(useColumnStore());
       const initialCard = cards.value[cardId];
       const editedCard: Card = {
         ...initialCard,
         ...cardFormValue,
       };
       cards.value[cardId] = editedCard;
+      boards.value[columns.value[initialCard.columnId]?.boardId].updatedAt =
+        Date.now();
     }
     function titleCardEdit(cardId: string, title: string) {
+      const { boards } = storeToRefs(useBoardStore());
+      const { columns } = storeToRefs(useColumnStore());
       const initialCard = cards.value[cardId];
       const editedCard: Card = {
         ...initialCard,
         title,
       };
       cards.value[cardId] = editedCard;
+      boards.value[columns.value[initialCard.columnId]?.boardId].updatedAt =
+        Date.now();
     }
     function getCard(cardId: string) {
       return cards.value[cardId];
