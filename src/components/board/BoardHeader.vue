@@ -14,6 +14,7 @@
       <Button
         class="flex gap-3.5 text-(--secondary) border-(--border) border"
         variant="ghost"
+        @click="exportBoard(board.id)"
         ><Download /> Export</Button
       >
       <AddColumnPopover :boardId="boardId" />
@@ -34,6 +35,7 @@ import { useCardStore } from "@/stores/card.ts";
 const { boardId } = defineProps<{ boardId: string }>();
 
 const { boards } = storeToRefs(useBoardStore());
+const { exportBoard } = useBoardStore();
 const board = boards.value[boardId];
 const { getColumnCount } = useColumnStore();
 const { getCardCount } = useCardStore();

@@ -6,11 +6,13 @@ import { defineStore, storeToRefs } from "pinia";
 import { ref } from "vue";
 import { toast } from "vue-sonner";
 import { useColumnStore } from "./column";
+import { useCardStore } from "./card";
 export const useBoardStore = defineStore(
   "BoardStore",
   () => {
     const boards = ref<Record<string, Board>>({});
     const { columns } = storeToRefs(useColumnStore());
+    const { cards } = storeToRefs(useCardStore());
     function addBoard(boardFormValues: BoardFormValue) {
       if (boards.value && getObjectLength(boards.value) >= 10) {
         toast.error("Board limit reached — maximum 10 boards");
@@ -46,7 +48,33 @@ export const useBoardStore = defineStore(
     function getBoard(boardId: string) {
       return boards.value[boardId];
     }
-    return { boards, addBoard, deleteBoard, editBoard, getBoard };
+    function exportBoard(boardId: string) {
+      const board = boards.value[boardId];
+      const boardColumns = Object.values(columns.value).filter(
+        (c) => c.boardId === boardId,
+      );
+      const columnCards = boardColumns.flatMap((col) =>
+        col.cardIds.map((id) => cards.value[id]),
+      );
+
+      const blob = new Blob(
+        [
+          JSON.stringify(
+            { board, columns: boardColumns, cards: columnCards },
+            null,
+            2,
+          ),
+        ],
+        { type: "application/json" },
+      );
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${board.name}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+    return { boards, addBoard, deleteBoard, editBoard, getBoard, exportBoard };
   },
   { persist: true },
 );
