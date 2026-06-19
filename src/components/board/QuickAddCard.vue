@@ -7,6 +7,7 @@
     <Plus /> Add Card
   </Button>
   <form v-else class="flex gap-2" @submit.prevent="submitForm">
+    <Label for="cardTitle" class="sr-only">Enter Card Name:</Label>
     <Input
       id="cardTitle"
       type="text"
@@ -31,6 +32,7 @@ import Input from "../ui/input/Input.vue";
 import { ArrowRight, Plus, X } from "@lucide/vue";
 import type { CardFormValue } from "@/types/index.ts";
 import { useCardStore } from "@/stores/card.ts";
+import Label from "../ui/label/Label.vue";
 
 const inputActive = ref(false);
 const cardTitle = ref("");
