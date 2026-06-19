@@ -45,7 +45,20 @@ export const useCardStore = defineStore(
     function deleteCard(cardId: string) {
       delete cards.value[cardId];
     }
-    function editCard(cardId: string, editedCard: Card) {
+    function editCard(cardId: string, cardFormValue: CardFormValue) {
+      const initialCard = cards.value[cardId];
+      const editedCard: Card = {
+        ...initialCard,
+        ...cardFormValue,
+      };
+      cards.value[cardId] = editedCard;
+    }
+    function titleCardEdit(cardId: string, title: string) {
+      const initialCard = cards.value[cardId];
+      const editedCard: Card = {
+        ...initialCard,
+        title,
+      };
       cards.value[cardId] = editedCard;
     }
     function getCard(cardId: string) {
@@ -58,7 +71,15 @@ export const useCardStore = defineStore(
         .reduce((total, col) => total + col.cardIds.length, 0);
     }
 
-    return { cards, addCard, deleteCard, editCard, getCard, getCardCount };
+    return {
+      cards,
+      addCard,
+      deleteCard,
+      editCard,
+      getCard,
+      getCardCount,
+      titleCardEdit,
+    };
   },
   { persist: true },
 );

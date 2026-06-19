@@ -8,9 +8,9 @@ export const statusColorVariableMap = {
 };
 
 export const statusTextMap = {
-  todo: "Todo",
+  todo: "To Do",
   "in-progress": "In Progress",
-  "in-review": "On Review",
+  "in-review": "In Review",
   done: "Done",
   cancelled: "Cancelled",
   blocked: "Blocked",

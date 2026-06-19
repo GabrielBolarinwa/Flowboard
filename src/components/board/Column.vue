@@ -4,9 +4,11 @@
       {{ column.name }}
     </h4>
     <div class="text-(--muted) flex gap-1.5 items-center min-w-1/2 w-max">
-      <Badge class="bg-(--border) py-0! px-2! font-mono h-fit">{{
-        cardCount
-      }}</Badge>
+      <Badge
+        variant="secondary"
+        class="bg-(--border) py-0! px-2! font-mono h-fit"
+        >{{ cardCount }}</Badge
+      >
       <Button
         @click="isOpen = true"
         class="w-auto h-auto rounded-full p-1.5! hover:bg-(--surface)"
@@ -23,11 +25,16 @@
       <DeleteColumnDialog :columnId="column.id" />
     </div>
   </div>
-  <ul class="mt-4" v-if="cards.length > 0">
-    <li v-for="card in cards">
-      <Card :card="card" />
-    </li>
-  </ul>
+  <ScrollArea class="h-[57.5dvh]" v-if="cards.length > 0">
+    <ul class="flex flex-col gap-2">
+      <li
+        v-for="card in cards"
+        class="flex bg-(--surface) border-(--border) rounded-lg shadow-card border p-4 flex-col"
+      >
+        <Card :card="card" />
+      </li>
+    </ul>
+  </ScrollArea>
   <NoCards v-else-if="cards.length === 0" />
   <QuickAddCard :columnId="column.id" :boardId="boardId" />
 </template>
@@ -47,6 +54,7 @@ import CardDetail from "../CardDetail.vue";
 import { ref } from "vue";
 import QuickAddCard from "./QuickAddCard.vue";
 import Card from "./Card.vue";
+import ScrollArea from "../ui/scroll-area/ScrollArea.vue";
 const { column, boardId } = defineProps<{ column: Column; boardId: string }>();
 const { cards: storeCards } = storeToRefs(useCardStore());
 const cards = computed(() => column.cardIds.map((id) => storeCards.value[id]));
