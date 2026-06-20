@@ -1,14 +1,61 @@
+<script lang="ts" setup>
+import { statusColorVariableMap, statusTextMap } from "@/constants";
+import type { Card } from "@/types";
+import { Calendar, GripVertical } from "@lucide/vue";
+import Badge from "../ui/badge/Badge.vue";
+import { computed, ref } from "vue";
+import { useSortable } from "@dnd-kit/vue/sortable";
+import EditTitle from "./EditTitle.vue";
+const editingTitle = ref(false);
+
+const emit = defineEmits<{ open: [cardId: string] }>();
+const props = defineProps<{
+  card: Card;
+  index: number;
+  columnId: string;
+}>();
+const statusText = statusTextMap[props.card.status];
+const dueDate =
+  props.card.dueDate &&
+  new Date(props.card.dueDate).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+const dueDateMs = props.card.dueDate && new Date(props.card.dueDate);
+const avatar = computed(() =>
+  props.card.assignee
+    ?.split(" ")
+    .map((n) => n[0])
+    .join("")
+    .slice(0, 2),
+);
+const statusVariablePrefix = statusColorVariableMap[props.card.status];
+const element = ref<HTMLElement | null>(null);
+const handle = ref<HTMLElement | null>(null);
+
+const { isDragging } = useSortable({
+  id: props.card.id,
+  index: computed(() => props.index),
+  group: computed(() => props.columnId),
+  element,
+  handle,
+  type: "card",
+  accept: "card",
+});
+</script>
 <template>
   <li
     class="flex bg-(--surface) border-(--border) rounded-lg shadow-card border p-4 flex-col hover:-translate-y-px hover:shadow-(--shadow-card-hover) cursor-pointer"
     :tabindex="0"
-    @click="emit('open', card.id)"
-    @keydown.enter="emit('open', card.id)"
-    @keydown.space.prevent="emit('open', card.id)"
-    :aria-label="`${card.title} ${card.status}, select for more details`"
+    @click="emit('open', props.card.id)"
+    @keydown.enter="emit('open', props.card.id)"
+    @keydown.space.prevent="emit('open', props.card.id)"
+    :aria-label="`${props.card.title} ${props.card.status}, select for more details`"
+    ref="element"
+    :data-dragging="isDragging"
   >
     <div class="flex gap-3">
-      <div class="w-4 h-4 cursor-grab">
+      <div class="w-4 h-4 cursor-grab" ref="handle">
         <GripVertical :size="16" />
       </div>
       <div class="-mt-2">
@@ -29,15 +76,15 @@
           @click.stop="editingTitle = true"
           v-if="!editingTitle"
         >
-          {{ card.title }}
+          {{ props.card.title }}
         </p>
         <EditTitle
           v-if="editingTitle"
-          :cardId="card.id"
+          :cardId="props.card.id"
           @closeInput="editingTitle = false"
         />
         <p class="text-sm font-regular leading-relaxed text-(--secondary) mt-2">
-          {{ card.description }}
+          {{ props.card.description }}
         </p>
       </div>
     </div>
@@ -45,12 +92,12 @@
       class="flex mt-2 justify-between font-mono text-xs text-(--muted) items-center"
     >
       <p>
-        {{ `${card.priority?.toUpperCase()}` }}
+        {{ `${props.card.priority?.toUpperCase()}` }}
       </p>
       <div class="flex gap-4 items-center">
         <p
           v-if="dueDate"
-          :class="`flex gap-2 items-center ${Date.now() > Number(card.dueDate) && 'text-destructive/80'}`"
+          :class="`flex gap-2 items-center ${Date.now() > Number(dueDateMs) ? 'text-destructive/80' : ''}`"
         >
           <Calendar :size="16" />{{ dueDate }}
         </p>
@@ -63,38 +110,5 @@
     </div>
   </li>
 </template>
-
-<script lang="ts" setup>
-import { statusColorVariableMap, statusTextMap } from "@/constants";
-import type { Card } from "@/types";
-import { Calendar, GripVertical } from "@lucide/vue";
-import Badge from "../ui/badge/Badge.vue";
-import { computed, ref } from "vue";
-import EditTitle from "./EditTitle.vue";
-// import { useDraggable } from "@vueuse/core";
-const editingTitle = ref(false);
-
-const emit = defineEmits<{ open: [cardId: string] }>();
-const { card } = defineProps<{ card: Card }>();
-const statusText = statusTextMap[card.status];
-const dueDate =
-  card.dueDate &&
-  new Date(card.dueDate).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  });
-const avatar = computed(() =>
-  card.assignee
-    ?.split(" ")
-    .map((n) => n[0])
-    .join("")
-    .slice(0, 2),
-);
-const statusVariablePrefix = statusColorVariableMap[card.status];
-
-// const {} = useDraggable({
-//   id: card.id,
-// });
-</script>
 
 <style></style>

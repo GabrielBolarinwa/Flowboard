@@ -89,6 +89,29 @@ export const useCardStore = defineStore(
       boards.value[columns.value[initialCard.columnId]?.boardId].updatedAt =
         Date.now();
     }
+
+    function moveCard(cardId: string, toColId: string) {
+      const { columns } = storeToRefs(useColumnStore());
+      const { boards } = storeToRefs(useBoardStore());
+      const card = cards.value[cardId];
+      if (!card) return;
+      const fromColId = card.columnId;
+      if (fromColId === toColId) {
+        return;
+      }
+      const toColumn = columns.value[toColId];
+      if (!toColumn) return;
+      card.columnId = toColId;
+      card.activity.push({
+        message: `Moved to ${toColumn.name}`,
+        timestamp: Date.now(),
+      });
+      if (toColumn.wipLimit && toColumn.cardIds.length > toColumn.wipLimit) {
+        toast.warning("WIP limit reached for this column");
+      }
+      boards.value[toColumn.boardId].updatedAt = Date.now();
+    }
+
     function getCard(cardId: string) {
       return cards.value[cardId];
     }
@@ -107,6 +130,7 @@ export const useCardStore = defineStore(
       getCard,
       getCardCount,
       titleCardEdit,
+      moveCard,
     };
   },
   { persist: true },

@@ -1,10 +1,12 @@
 <template>
   <li
     :class="`bg-(--surface-2) rounded-lg p-4 flex w-78 flex-col min-h-[96px] gap-4 h-fit border ${column.wipLimit && column.cardIds.length > column.wipLimit ? `border-destructive/30` : `border-(--border)`}`"
+    ref="element"
   >
     <div class="flex justify-between items-center text-xs gap-1">
       <h4
         class="font-bold uppercase text-(--secondary) truncate tracking-widest cursor-grab select-none"
+        ref="handle"
       >
         <GripVertical class="mr-1 inline" :size="14" /> {{ column.name }}
       </h4>
@@ -24,17 +26,19 @@
         <DeleteColumnDialog :columnId="column.id" />
       </div>
     </div>
-    <ScrollArea class="h-[57.5dvh]" v-if="cards.length > 0">
-      <ul class="flex flex-col gap-2">
+    <ScrollArea class="h-[57.5dvh]">
+      <ul class="flex flex-col gap-2 min-h-[57.5dvh]">
         <Card
+          v-for="(card, index) in cards"
           :card="card"
-          v-for="card in cards"
           :key="card.id"
+          :index="index"
+          :columnId="column.id"
           @open="editDialogOpen"
         />
+        <NoCards v-if="cards.length === 0" />
       </ul>
     </ScrollArea>
-    <NoCards v-else-if="cards.length === 0" />
     <QuickAddCard :columnId="column.id" :boardId="boardId" />
   </li>
 
@@ -54,6 +58,8 @@
 <script lang="ts" setup>
 import { useCardStore } from "@/stores/card";
 import { type Column } from "@/types";
+import { CollisionPriority } from "@dnd-kit/abstract";
+import { useSortable } from "@dnd-kit/vue/sortable";
 import { GripVertical, Plus } from "@lucide/vue";
 import { storeToRefs } from "pinia";
 import { computed, ref } from "vue";
@@ -67,14 +73,31 @@ import DeleteColumnDialog from "./DeleteColumnDialog.vue";
 import EditColumnPopover from "./EditColumnPopover.vue";
 import NoCards from "./NoCards.vue";
 import QuickAddCard from "./QuickAddCard.vue";
-const { column, boardId } = defineProps<{ column: Column; boardId: string }>();
+const { column, boardId, index } = defineProps<{
+  column: Column;
+  boardId: string;
+  index: number;
+}>();
 const { cards: storeCards } = storeToRefs(useCardStore());
 const cards = computed(() => column.cardIds.map((id) => storeCards.value[id]));
 const cardCount = computed(() => column.cardIds.length ?? 0);
 
+const element = ref<HTMLElement | null>(null);
+const handle = ref<HTMLElement | null>(null);
+
 const open = ref(false);
 const dialogMode = ref<"create" | "edit">("create");
 const activeCardId = ref<string | undefined>(undefined);
+
+useSortable({
+  id: column.id,
+  index,
+  accept: ["column", "card"],
+  type: "column",
+  collisionPriority: CollisionPriority.Low,
+  element,
+  handle,
+});
 
 function createDialogOpen() {
   dialogMode.value = "create";

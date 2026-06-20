@@ -3,7 +3,15 @@
   <main>
     <div class="px-8 py-6">
       <ul v-if="columns.length > 0" class="flex gap-5">
-        <Column :column="column" :boardId="boardId" v-for="column in columns" />
+        <DragDropProvider @dragOver="onDragOver" @dragEnd="onDragEnd">
+          <Column
+            v-for="(column, index) in columns"
+            :column="column"
+            :boardId="boardId"
+            :index="index"
+            :key="column.id"
+          />
+        </DragDropProvider>
       </ul>
     </div>
   </main>
@@ -17,15 +25,55 @@ import { useColumnStore } from "@/stores/column";
 import { storeToRefs } from "pinia";
 import { computed } from "vue";
 import { useRoute } from "vue-router";
+import {
+  DragDropProvider,
+  type DragEndEvent,
+  type DragOverEvent,
+} from "@dnd-kit/vue";
+import { isSortable } from "@dnd-kit/dom/sortable";
+import { move } from "@dnd-kit/helpers";
+import { useCardStore } from "@/stores/card";
 
 const route = useRoute();
 const boardId = route.params.boardId as string;
+
 const { boards } = storeToRefs(useBoardStore());
-const board = computed(() => boards.value[boardId]);
 const { columns: storeColumns } = storeToRefs(useColumnStore());
+const { cards } = storeToRefs(useCardStore());
+const { moveCard } = useCardStore();
+
+const board = computed(() => boards.value[boardId]);
 const columns = computed(() =>
   board.value.columnIds.map((id) => storeColumns.value[id]),
 );
+
+function onDragOver(evt: DragOverEvent) {
+  const { source } = evt.operation;
+  if (source?.type === "column") return;
+  if (!isSortable(source) || source.type !== "card") {
+    return;
+  }
+  const grouped: Record<string, string[]> = {};
+  for (const col of columns.value) {
+    grouped[col.id] = [...col.cardIds];
+  }
+  const moved = move(grouped, evt as unknown as Parameters<typeof move>[1]);
+  for (const colId in moved) {
+    storeColumns.value[colId].cardIds = moved[colId];
+  }
+}
+
+function onDragEnd(evt: DragEndEvent) {
+  if (evt.canceled) return;
+  const { source } = evt.operation;
+  if (!isSortable(source) || source.type !== "card") return;
+  const cardId = source.id as string;
+  const card = cards.value[cardId];
+  if (!card) return;
+  const finalColumnId = source.group as string;
+  if (card.columnId === finalColumnId) return;
+  moveCard(cardId, finalColumnId);
+}
 </script>
 
 <style></style>

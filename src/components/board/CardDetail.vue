@@ -278,7 +278,7 @@ const today = new Date().toISOString().split("T")[0];
         class="bg-(--bg) border-(--border) py-3 px-4 font-mono text-sm rounded-lg"
       >
         <ScrollArea class="h-[20vh]">
-          <li v-for="activity in card?.activity">
+          <li v-for="activity in card?.activity" :key="activity.timestamp">
             {{ activity.message }}, {{ timeAgo(activity.timestamp) }}
           </li>
         </ScrollArea>

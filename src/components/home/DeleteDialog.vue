@@ -9,6 +9,7 @@ import AlertDialogFooter from "../ui/alert-dialog/AlertDialogFooter.vue";
 import AlertDialogDescription from "../ui/alert-dialog/AlertDialogDescription.vue";
 import AlertDialogCancel from "../ui/alert-dialog/AlertDialogCancel.vue";
 import AlertDialogAction from "../ui/alert-dialog/AlertDialogAction.vue";
+import Button from "../ui/button/Button.vue";
 
 defineProps(["open", "boardId"]);
 defineEmits(["update:open"]);
