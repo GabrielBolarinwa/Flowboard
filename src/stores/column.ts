@@ -11,6 +11,7 @@ export const useColumnStore = defineStore(
     const columns = ref<Record<string, Column>>({});
     function addColumn(columnFormValue: ColumnFormValue, boardId: string) {
       const { boards } = storeToRefs(useBoardStore());
+      const { updateBoardLastUpdated } = useBoardStore();
 
       const column: Column = {
         id: nanoid(Math.round(15.75)),
@@ -32,12 +33,13 @@ export const useColumnStore = defineStore(
       columns.value[column.id] = column;
 
       boards.value[boardId].columnIds.push(column.id);
-      boards.value[boardId].updatedAt = Date.now();
+      updateBoardLastUpdated(boardId);
       toast.success("Column was successfully created");
     }
     function deleteColumn(columnId: string) {
       const { boards } = storeToRefs(useBoardStore());
       const { cards } = storeToRefs(useCardStore());
+      const { updateBoardLastUpdated } = useBoardStore();
 
       const column = columns.value[columnId];
       if (!column) return;
@@ -46,20 +48,20 @@ export const useColumnStore = defineStore(
         column.boardId
       ].columnIds.filter((id) => id !== columnId);
       delete columns.value[columnId];
-      boards.value[column.boardId].updatedAt = Date.now();
+      updateBoardLastUpdated(column.boardId);
     }
     function editColumn(
       columnId: string,
       editedColumn: { name: string; wipLimit: number | null },
     ) {
-      const { boards } = storeToRefs(useBoardStore());
+      const { updateBoardLastUpdated } = useBoardStore();
 
       const column = columns.value[columnId];
       columns.value[columnId] = {
         ...column,
         ...editedColumn,
       };
-      boards.value[column.boardId].updatedAt = Date.now();
+      updateBoardLastUpdated(column.boardId);
     }
     function getColumn(columnId: string) {
       return columns.value[columnId];
@@ -67,6 +69,19 @@ export const useColumnStore = defineStore(
     function getColumnCount(boardId: string) {
       return Object.values(columns.value).filter((c) => c.boardId === boardId)
         .length;
+    }
+    function moveColumn(columnId: string, boardId: string, toIndex: number) {
+      const { boards } = storeToRefs(useBoardStore());
+      const { updateBoardLastUpdated } = useBoardStore();
+
+      const board = boards.value[boardId];
+      if (!board) return;
+      const ids = [...board.columnIds];
+      const fromIndex = ids.indexOf(columnId);
+      if (fromIndex === -1 || fromIndex === toIndex) return;
+      ids.splice(fromIndex, 1);
+      ids.splice(toIndex, 0, columnId);
+      updateBoardLastUpdated(boardId);
     }
 
     return {
@@ -76,6 +91,7 @@ export const useColumnStore = defineStore(
       editColumn,
       getColumn,
       getColumnCount,
+      moveColumn,
     };
   },
   { persist: true },

@@ -23,7 +23,7 @@ import Column from "@/components/board/Column.vue";
 import { useBoardStore } from "@/stores/board";
 import { useColumnStore } from "@/stores/column";
 import { storeToRefs } from "pinia";
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import {
   DragDropProvider,
@@ -39,6 +39,7 @@ const boardId = route.params.boardId as string;
 
 const { boards } = storeToRefs(useBoardStore());
 const { columns: storeColumns } = storeToRefs(useColumnStore());
+const { moveColumn } = useColumnStore();
 const { cards } = storeToRefs(useCardStore());
 const { moveCard } = useCardStore();
 
@@ -66,14 +67,24 @@ function onDragOver(evt: DragOverEvent) {
 function onDragEnd(evt: DragEndEvent) {
   if (evt.canceled) return;
   const { source } = evt.operation;
+  if (isSortable(source) && source?.type === "column") {
+    const columnId = source?.id as string;
+    const finalIndex = source?.index as number;
+    moveColumn(columnId, boardId, finalIndex);
+    return;
+  }
   if (!isSortable(source) || source.type !== "card") return;
-  const cardId = source.id as string;
+  const cardId = source?.id as string;
   const card = cards.value[cardId];
   if (!card) return;
-  const finalColumnId = source.group as string;
+  const finalColumnId = source?.group as string;
   if (card.columnId === finalColumnId) return;
   moveCard(cardId, finalColumnId);
 }
+
+onMounted(() => {
+  document.title = `${board.value.name} Board — Flowboard`;
+});
 </script>
 
 <style></style>

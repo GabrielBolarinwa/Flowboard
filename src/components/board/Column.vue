@@ -7,6 +7,7 @@
       <h4
         class="font-bold uppercase text-(--secondary) truncate tracking-widest cursor-grab select-none"
         ref="handle"
+        :tabindex="0"
       >
         <GripVertical class="mr-1 inline" :size="14" /> {{ column.name }}
       </h4>

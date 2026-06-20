@@ -43,7 +43,7 @@ export const useBoardStore = defineStore(
     ) {
       const boardToEdit = boards.value[boardId];
       boards.value[boardId] = { ...boardToEdit, ...editedBoard };
-      boards.value[boardId].updatedAt = Date.now();
+      updateBoardLastUpdated(boardId);
     }
     function getBoard(boardId: string) {
       return boards.value[boardId];
@@ -74,7 +74,19 @@ export const useBoardStore = defineStore(
       a.click();
       URL.revokeObjectURL(url);
     }
-    return { boards, addBoard, deleteBoard, editBoard, getBoard, exportBoard };
+    function updateBoardLastUpdated(boardId: string) {
+      boards.value[boardId].updatedAt = Date.now();
+    }
+
+    return {
+      boards,
+      addBoard,
+      deleteBoard,
+      editBoard,
+      getBoard,
+      exportBoard,
+      updateBoardLastUpdated,
+    };
   },
   { persist: true },
 );
