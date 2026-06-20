@@ -3,12 +3,7 @@
   <main>
     <div class="px-8 py-6">
       <ul v-if="columns.length > 0" class="flex gap-5">
-        <li
-          v-for="column in columns"
-          :class="`bg-(--surface-2) rounded-lg p-4 flex w-78 flex-col min-h-[96px] gap-4 h-fit border ${column.wipLimit && column.cardIds.length > column.wipLimit ? `border-destructive/30` : `border-(--border)`}`"
-        >
-          <Column :column="column" :boardId="boardId" />
-        </li>
+        <Column :column="column" :boardId="boardId" v-for="column in columns" />
       </ul>
     </div>
   </main>
