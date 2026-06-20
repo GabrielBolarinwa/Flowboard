@@ -34,7 +34,9 @@ const onSubmit = handleSubmit((values) => {
 <template>
   <Popover v-model:open="isOpen">
     <PopoverTrigger as-child>
-      <Button class="flex gap-2 bg-(--accent)"><Plus /> Add Column</Button>
+      <Button class="flex gap-2 bg-(--accent)"
+        ><Plus /> <span class="sr-only md:not-sr-only">Add Column</span></Button
+      >
     </PopoverTrigger>
     <PopoverContent
       class="w-80 m-0 px-0 bg-(--surface) border-(--border) border-2 radius-lg p-5"
