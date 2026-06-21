@@ -15,7 +15,8 @@
         class="flex gap-3.5 text-(--secondary) border-(--border) border"
         variant="ghost"
         @click="exportBoard(board.id)"
-        ><Download /> <span class="sr-only md:not-sr-only">Export</span></Button
+        ><Download aria-hidden />
+        <span class="sr-only md:not-sr-only">Export</span></Button
       >
       <AddColumnPopover :boardId="boardId" />
     </div>

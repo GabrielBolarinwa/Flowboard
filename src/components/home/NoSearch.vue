@@ -3,7 +3,7 @@
     <div
       class="mx-auto bg-(--surface-2) border border-(--border) p-6 rounded-md"
     >
-      <SearchX :size="32" />
+      <SearchX aria-hidden :size="32" />
     </div>
     <p>No boards match</p>
     <p class="text-(--secondary)">

@@ -7,6 +7,7 @@
       <Button
         variant="outline"
         class="w-fit absolute right-3 -translate-x-3 border-(--border) z-3"
+        aria-label="Board Options"
         ><Ellipsis
       /></Button>
     </DropdownMenuTrigger>
@@ -17,10 +18,10 @@
       <DropdownMenuSeparator class="bg-(--border-focus)" />
       <DropdownMenuGroup>
         <DropdownMenuItem @select.prevent="isAlertOpen = true"
-          ><Trash2 /> Delete Board</DropdownMenuItem
+          ><Trash2 aria-hidden /> Delete Board</DropdownMenuItem
         >
         <DropdownMenuItem @select.prevent="isDialogOpen = true"
-          ><Edit3 /> Edit Board</DropdownMenuItem
+          ><Edit3 aria-hidden /> Edit Board</DropdownMenuItem
         >
       </DropdownMenuGroup>
     </DropdownMenuContent>

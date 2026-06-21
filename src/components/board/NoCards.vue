@@ -5,7 +5,7 @@
     <div
       class="mx-auto bg-(--surface-2) border border-(--border) p-6 rounded-md"
     >
-      <KanbanSquare :size="32" />
+      <KanbanSquare aria-hidden :size="32" />
     </div>
     <p>No cards yet</p>
     <p class="text-(--secondary)">Create a card below or in the menu above</p>

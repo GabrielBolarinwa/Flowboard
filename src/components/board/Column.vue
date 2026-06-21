@@ -9,17 +9,20 @@
         ref="handle"
         :tabindex="0"
       >
-        <GripVertical class="mr-1 inline" :size="14" /> {{ column.name }}
+        <GripVertical aria-hidden class="mr-1 inline" :size="14" />
+        {{ column.name }}
       </h4>
       <div class="text-(--muted) flex gap-1.5 items-center min-w-1/2 w-max">
         <Badge
           variant="secondary"
           class="bg-(--border) py-0! px-2! font-mono h-fit"
+          :aria-label="`Card is ${cardCount}`"
           >{{ cardCount }}</Badge
         >
         <Button
           @click="createDialogOpen"
           class="w-auto h-auto rounded-full p-1.5! hover:bg-(--surface)"
+          aria-label="Add Card"
         >
           <Plus />
         </Button>

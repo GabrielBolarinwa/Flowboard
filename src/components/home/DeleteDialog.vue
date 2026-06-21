@@ -36,13 +36,13 @@ const { deleteBoard } = useBoardStore();
             variant="ghost"
             class="border-(--border) hover:bg-(--border)/30"
           >
-            <CircleX /> Cancel
+            <CircleX aria-hidden /> Cancel
           </Button></AlertDialogCancel
         >
         <AlertDialogAction
           class="border-(--border) bg-destructive hover:bg-destructive-hover"
           @click="deleteBoard(boardId)"
-          ><Trash2 /> Delete</AlertDialogAction
+          ><Trash2 aria-hidden /> Delete</AlertDialogAction
         >
       </AlertDialogFooter>
     </AlertDialogContent>

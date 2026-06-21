@@ -22,9 +22,9 @@ const { deleteCard } = useCardStore();
   <AlertDialog>
     <AlertDialogTrigger>
       <Button
-        class="border border-(--border) bg-destructive hover:bg-destructive-hover"
+        class="border border-(--border) bg-destructive hover:bg-destructive-hover md:w-auto w-full"
         variant="destructive"
-        ><Trash2 /> Delete</Button
+        ><Trash2 aria-hidden /> Delete</Button
       >
     </AlertDialogTrigger>
     <AlertDialogContent
@@ -45,7 +45,7 @@ const { deleteCard } = useCardStore();
             variant="ghost"
             class="border-(--border) hover:bg-(--border)/30"
           >
-            <CircleX /> Cancel
+            <CircleX aria-hidden /> Cancel
           </Button></AlertDialogCancel
         >
         <AlertDialogAction
@@ -54,7 +54,7 @@ const { deleteCard } = useCardStore();
             emits('close');
             deleteCard(cardId);
           "
-          ><Trash2 /> Delete</AlertDialogAction
+          ><Trash2 aria-hidden /> Delete</AlertDialogAction
         >
       </AlertDialogFooter>
     </AlertDialogContent>

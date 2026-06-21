@@ -48,7 +48,9 @@ const onSubmit = handleSubmit((values) => {
 <template>
   <Popover v-model:open="isOpen">
     <PopoverTrigger as-child>
-      <Button class="w-auto h-auto rounded-full p-1.5! hover:bg-(--surface)"
+      <Button
+        class="w-auto h-auto rounded-full p-1.5! hover:bg-(--surface)"
+        aria-label="Edit Column"
         ><Edit3
       /></Button>
     </PopoverTrigger>

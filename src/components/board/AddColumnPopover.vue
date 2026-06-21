@@ -35,7 +35,8 @@ const onSubmit = handleSubmit((values) => {
   <Popover v-model:open="isOpen">
     <PopoverTrigger as-child>
       <Button class="flex gap-2 bg-(--accent) hover:bg-(--accent-hover)"
-        ><Plus /> <span class="sr-only md:not-sr-only">Add Column</span></Button
+        ><Plus aria-hidden />
+        <span class="sr-only md:not-sr-only">Add Column</span></Button
       >
     </PopoverTrigger>
     <PopoverContent
@@ -57,6 +58,7 @@ const onSubmit = handleSubmit((values) => {
             <Button
               class="absolute top-[50%] -translate-y-1/2 right-1 bg-(--surface) h-full px-3 py-2 w-auto border border-(--border)"
               type="submit"
+              aria-label="Add Column"
               ><ArrowRight
             /></Button>
           </div>

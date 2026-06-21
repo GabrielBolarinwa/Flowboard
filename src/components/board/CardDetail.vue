@@ -306,7 +306,7 @@ const today = new Date().toISOString().split("T")[0];
         form="cardForm"
         ><span v-if="mode === 'create'">Create Card</span
         ><span v-else-if="mode === 'edit'" class="flex gap-2 items-center"
-          ><Save /> Save
+          ><Save aria-hidden /> Save
         </span></Button
       >
     </DialogFooter>

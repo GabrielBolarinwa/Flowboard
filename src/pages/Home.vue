@@ -2,6 +2,7 @@
   <button
     class="absolute top-3 right-3 bg-(--surface-2) p-3 rounded-lg border-(--border) border-2 hover:bg-(--accent)"
     @click="themeStore.toggleTheme"
+    aria-label="Change Theme"
   >
     <SunMoon />
   </button>
@@ -27,7 +28,11 @@
         placeholder="Search for your boards"
         v-model="searchInput"
       />
-      <Search :size="15.5" class="absolute top-1/2 left-5.5 -translate-y-1/2" />
+      <Search
+        aria-hidden
+        :size="15.5"
+        class="absolute top-1/2 left-5.5 -translate-y-1/2"
+      />
     </search>
     <section class="mt-10">
       <div class="flex justify-between item-center gap-4">

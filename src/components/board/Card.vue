@@ -56,7 +56,7 @@ const { isDragging } = useSortable({
   >
     <div class="flex gap-3">
       <div class="w-4 h-4 cursor-grab" ref="handle">
-        <GripVertical :size="16" />
+        <GripVertical :size="16" aria-label="Drag Card" />
       </div>
       <div class="-mt-2">
         <Badge
@@ -99,7 +99,7 @@ const { isDragging } = useSortable({
           v-if="dueDate"
           :class="`flex gap-2 items-center ${Date.now() > Number(dueDateMs) ? 'text-destructive/80' : ''}`"
         >
-          <Calendar :size="16" />{{ dueDate }}
+          <Calendar aria-hidden :size="16" />{{ dueDate }}
         </p>
         <Badge
           v-if="avatar"
