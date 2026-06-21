@@ -1,4 +1,10 @@
 <template>
+  <button
+    class="absolute top-3 right-3 bg-(--surface-2) p-3 rounded-lg border-(--border) border-2 hover:bg-(--accent)"
+    @click="themeStore.toggleTheme"
+  >
+    <SunMoon />
+  </button>
   <main class="p-6">
     <Transition
       enter-active-class="animate-in fade-in slide-in-from-top duration-3000 delay-500"
@@ -60,10 +66,20 @@ import Separator from "@/components/ui/separator/Separator.vue";
 import { useBoardStore } from "@/stores/board";
 import type { Board } from "@/types";
 import getObjectLength from "@/utils/getObjectLength";
-import { Search } from "@lucide/vue";
+import { Search, SunMoon } from "@lucide/vue";
 import { storeToRefs } from "pinia";
 import { watch } from "vue";
 import { ref, Transition } from "vue";
+import { useThemeStore } from "@/stores/theme";
+
+const themeStore = useThemeStore();
+watch(
+  () => themeStore.theme,
+  (theme) => {
+    document.documentElement.setAttribute("data-theme", theme);
+  },
+  { immediate: true },
+);
 
 const searchInput = ref("");
 const { boards: storeBoards } = storeToRefs(useBoardStore());

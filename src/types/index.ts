@@ -61,3 +61,5 @@ export type status =
   | "blocked"
   | "done"
   | "cancelled";
+
+export type Theme = "system" | "light" | "dark";
