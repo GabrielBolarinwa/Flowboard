@@ -15,6 +15,7 @@
       </ul>
     </div>
   </main>
+  <div role="status" aria-live="polite" class="sr-only">{{ announcement }}</div>
 </template>
 
 <script lang="ts" setup>
@@ -23,7 +24,7 @@ import Column from "@/components/board/Column.vue";
 import { useBoardStore } from "@/stores/board";
 import { useColumnStore } from "@/stores/column";
 import { storeToRefs } from "pinia";
-import { computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import {
   DragDropProvider,
@@ -47,6 +48,7 @@ const board = computed(() => boards.value[boardId]);
 const columns = computed(() =>
   board.value.columnIds.map((id) => storeColumns.value[id]),
 );
+const announcement = ref("");
 
 function onDragOver(evt: DragOverEvent) {
   const { source } = evt.operation;
@@ -71,6 +73,7 @@ function onDragEnd(evt: DragEndEvent) {
     const columnId = source?.id as string;
     const finalIndex = source?.index as number;
     moveColumn(columnId, boardId, finalIndex);
+    announcement.value = `Column moved to position ${source.index + 1}`;
     return;
   }
   if (!isSortable(source) || source.type !== "card") return;
@@ -80,6 +83,8 @@ function onDragEnd(evt: DragEndEvent) {
   const finalColumnId = source?.group as string;
   if (card.columnId === finalColumnId) return;
   moveCard(cardId, finalColumnId);
+  const toColumn = storeColumns.value[finalColumnId];
+  announcement.value = `Card moved to ${toColumn.name}`;
 }
 
 onMounted(() => {
