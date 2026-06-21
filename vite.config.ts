@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import vue from "@vitejs/plugin-vue";
 import tailwindcss from "@tailwindcss/vite";
 import path from "node:path";
@@ -15,6 +15,13 @@ export default defineConfig({
     }),
     tailwindcss(),
   ],
+  test: {
+    environment: "jsdom",
+    globals: true,
+    pool: "forks",
+    testTimeout: 10000000,
+    hookTimeout: 10000000,
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
