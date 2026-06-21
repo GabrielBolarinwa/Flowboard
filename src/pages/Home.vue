@@ -1,6 +1,6 @@
 <template>
   <button
-    class="absolute top-3 right-3 bg-(--surface-2) p-3 rounded-lg border-(--border) border-2 hover:bg-(--accent)"
+    class="absolute top-3 right-3 bg-(--surface-2) p-2 md:p-3 rounded-lg border-(--border) border-2 hover:bg-(--accent)"
     @click="themeStore.toggleTheme"
     aria-label="Change Theme"
   >
