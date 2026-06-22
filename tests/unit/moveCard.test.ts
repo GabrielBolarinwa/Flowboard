@@ -28,8 +28,8 @@ describe("moveCard", () => {
     const { cardStore } = seedBasicBoard();
     cardStore.moveCard("card-1", "col-2");
     const entry = cardStore.cards["card-1"].activity.at(-1);
-    expect(entry.message).toBe("Moved to In Progress");
-    expect(typeof entry.timestamp).toBe("number");
+    expect(entry?.message).toBe("Moved to In Progress");
+    expect(typeof entry?.timestamp).toBe("number");
   });
 
   it("does nothing when the destination is the same", async () => {

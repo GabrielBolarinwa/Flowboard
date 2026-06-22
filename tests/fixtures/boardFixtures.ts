@@ -9,7 +9,7 @@ export function seedBasicBoard() {
   boardStore.boards["board-1"] = {
     id: "board-1",
     name: "Test Board",
-    description: null,
+    description: undefined,
     updatedAt: 0,
     columnIds: ["col-1", "col-2"],
   };
@@ -37,8 +37,8 @@ export function seedBasicBoard() {
     description: "",
     status: "todo",
     priority: "medium",
-    dueDate: null,
-    assignee: null,
+    dueDate: undefined,
+    assignee: undefined,
     activity: [],
   };
 
