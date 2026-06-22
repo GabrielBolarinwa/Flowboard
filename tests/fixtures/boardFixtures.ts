@@ -42,5 +42,41 @@ export function seedBasicBoard() {
     activity: [],
   };
 
+  cardStore.cards["card-2"] = {
+    id: "card-2",
+    columnId: "col-1",
+    title: "Test Card",
+    description: "",
+    status: "todo",
+    priority: "medium",
+    dueDate: undefined,
+    assignee: undefined,
+    activity: [],
+  };
+
+  cardStore.cards["card-51"] = {
+    id: "card-51",
+    columnId: "col-2",
+    title: "Test Card",
+    description: "",
+    status: "todo",
+    priority: "medium",
+    dueDate: undefined,
+    assignee: undefined,
+    activity: [],
+  };
+
+  cardStore.cards["card-52"] = {
+    id: "card-52",
+    columnId: "col-2",
+    title: "Test Card",
+    description: "",
+    status: "todo",
+    priority: "medium",
+    dueDate: undefined,
+    assignee: undefined,
+    activity: [],
+  };
+
   return { boardStore, columnStore, cardStore };
 }

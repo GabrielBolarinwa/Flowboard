@@ -105,7 +105,7 @@ describe("addCard", () => {
       id: expect.any(String),
       ...card,
     });
-    expect(Object.keys(cardStore.cards)).length(1);
+    expect(Object.keys(cardStore.cards)).length(4);
   });
   it("should add activity entry on successfully addition", () => {
     const { cardStore } = seedBasicBoard();
