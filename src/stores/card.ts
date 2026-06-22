@@ -22,8 +22,13 @@ export const useCardStore = defineStore(
           (card) => card.columnId === colId,
         );
         const column = columns[colId];
-        if (column.wipLimit && cardsInColumn.length >= column.wipLimit) {
-          toast.warning("WIP limit has been reached for this column");
+        if (column) {
+          if (column.wipLimit && cardsInColumn.length >= column.wipLimit) {
+            toast.warning("WIP limit has been reached for this column");
+            return;
+          }
+        } else {
+          return;
         }
         if (cardsInColumn.length >= 50) {
           toast.error("Card limit reached — maximum 50 cards per column");
