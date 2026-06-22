@@ -96,15 +96,10 @@ describe("addCard", () => {
       status: "todo",
       priority: "medium",
     };
+    const cardsBefore = JSON.parse(JSON.stringify(cardStore.cards));
     cardStore.addCard(card, "not-real", "board-1");
-    const lastItem =
-      cardStore.cards[
-        Object.keys(cardStore.cards)[Object.keys(cardStore.cards).length - 1]
-      ];
-    expect(lastItem).not.toEqual({
-      id: expect.any(String),
-      ...card,
-    });
+
+    expect(cardStore.cards).toEqual(cardsBefore);
     expect(Object.keys(cardStore.cards)).length(4);
   });
   it("should add activity entry on successfully addition", () => {
