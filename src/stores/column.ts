@@ -12,6 +12,7 @@ export const useColumnStore = defineStore(
     function addColumn(columnFormValue: ColumnFormValue, boardId: string) {
       const { boards } = storeToRefs(useBoardStore());
       const { updateBoardLastUpdated } = useBoardStore();
+      if (!boards.value[boardId]) return;
 
       const column: Column = {
         id: nanoid(Math.round(15.75)),
