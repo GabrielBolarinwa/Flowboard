@@ -18,7 +18,7 @@ export function seedBasicBoard() {
     id: "col-1",
     boardId: "board-1",
     name: "To Do",
-    cardIds: ["card-1"],
+    cardIds: ["card-1", "card-2"],
     wipLimit: null,
   };
 
@@ -26,7 +26,7 @@ export function seedBasicBoard() {
     id: "col-2",
     boardId: "board-1",
     name: "In Progress",
-    cardIds: [],
+    cardIds: ["card-51", "card-52"],
     wipLimit: null,
   };
 
