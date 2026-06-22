@@ -51,7 +51,7 @@ describe("addCard", () => {
     const { cardStore, columnStore } = seedBasicBoard();
     cardStore.cards = generateMockItems(50);
     columnStore.columns["col-1"].cardIds = Object.values(cardStore.cards).map(
-      (card) => card.columnId === "col-1",
+      (card) => card.columnId === "col-1" && card.id,
     );
     const card: CardFormValue = {
       title: "New card",
