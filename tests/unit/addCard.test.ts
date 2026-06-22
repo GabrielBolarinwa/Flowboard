@@ -53,41 +53,31 @@ describe("addCard", () => {
     columnStore.columns["col-1"].cardIds = Object.values(cardStore.cards).map(
       (card) => card.columnId === "col-1" && card.id,
     );
+    const cardsBefore = JSON.parse(JSON.stringify(cardStore.cards));
     const card: CardFormValue = {
       title: "New card",
       status: "todo",
       priority: "medium",
     };
-    cardStore.addCard(card, "col-1", "board-1");
-    const lastItem =
-      cardStore.cards[
-        Object.keys(cardStore.cards)[Object.keys(cardStore.cards).length - 1]
-      ];
-    expect(lastItem).not.toEqual({
-      id: expect.any(String),
-      ...card,
-    });
+    expect(cardStore.addCard(card, "col-1", "board-1")).toBeUndefined();
+    expect(cardStore.cards).toEqual(cardsBefore);
     expect(Object.keys(cardStore.cards)).length(50);
   });
   it("should not add card if column WIP limit is reached", () => {
     const { cardStore, columnStore } = seedBasicBoard();
     columnStore.columns["col-1"].wipLimit = 1;
     cardStore.cards = generateMockItems(1);
+    const cardsBefore = JSON.parse(JSON.stringify(cardStore.cards));
+
     const card: CardFormValue = {
       title: "New card",
       status: "todo",
       priority: "medium",
     };
     cardStore.addCard(card, "col-1", "board-1");
-    const lastItem =
-      cardStore.cards[
-        Object.keys(cardStore.cards)[Object.keys(cardStore.cards).length - 1]
-      ];
-    expect(lastItem).not.toEqual({
-      id: expect.any(String),
-      ...card,
-    });
-    expect(Object.keys(cardStore.cards)).length(1);
+
+    expect(cardStore.addCard(card, "col-1", "board-1")).toBeUndefined();
+    expect(cardStore.cards).toEqual(cardsBefore);
   });
   it("should do nothing add if columnId is invalid", () => {
     const { cardStore } = seedBasicBoard();
