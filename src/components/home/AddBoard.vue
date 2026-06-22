@@ -24,6 +24,7 @@ import { boardSchema } from "@/schemas/board.ts";
 import { useBoardStore } from "@/stores/board.ts";
 import { Plus } from "@lucide/vue";
 import Textarea from "../ui/textarea/Textarea.vue";
+import { router } from "@/router.ts";
 
 const isOpen = ref(false);
 const boardFormSchema = toTypedSchema(boardSchema);
@@ -36,8 +37,11 @@ const { handleSubmit, defineField, errors } = useForm({
 const [name, nameAttrs] = defineField("name");
 const [description, descriptionAttrs] = defineField("description");
 const onSubmit = handleSubmit((values) => {
-  addBoard(values);
+  const boardId = addBoard(values);
   isOpen.value = false;
+  setTimeout(() => {
+    router.push(`/board/${boardId}`);
+  }, 1000);
 });
 </script>
 

@@ -1,12 +1,11 @@
-import { router } from "@/router";
 import type { Board, BoardFormValue } from "@/types";
 import getObjectLength from "@/utils/getObjectLength";
 import { nanoid } from "nanoid";
 import { defineStore, storeToRefs } from "pinia";
 import { ref } from "vue";
 import { toast } from "vue-sonner";
-import { useColumnStore } from "./column";
 import { useCardStore } from "./card";
+import { useColumnStore } from "./column";
 export const useBoardStore = defineStore(
   "BoardStore",
   () => {
@@ -27,9 +26,7 @@ export const useBoardStore = defineStore(
       };
       boards.value[board.id] = board;
       toast.success("Board was created successfully");
-      setTimeout(() => {
-        router.push(`/board/${board.id}`);
-      }, 500);
+      return board.id;
     }
     function deleteBoard(boardId: string) {
       const board = boards.value[boardId];
