@@ -82,6 +82,7 @@ export const useColumnStore = defineStore(
       if (fromIndex === -1 || fromIndex === toIndex) return;
       ids.splice(fromIndex, 1);
       ids.splice(toIndex, 0, columnId);
+      board.columnIds = ids;
       updateBoardLastUpdated(boardId);
     }
 
