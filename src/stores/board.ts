@@ -31,7 +31,12 @@ export const useBoardStore = defineStore(
     function deleteBoard(boardId: string) {
       const board = boards.value[boardId];
       if (!board) return;
-      board.columnIds.forEach((columnId) => delete columns.value[columnId]);
+      board.columnIds.forEach((columnId) => {
+        columns.value[columnId].cardIds.forEach(
+          (cardId) => delete cards.value[cardId],
+        );
+        return delete columns.value[columnId];
+      });
       delete boards.value[boardId];
     }
     function editBoard(
