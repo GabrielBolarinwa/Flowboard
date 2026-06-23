@@ -1,6 +1,7 @@
 import { createPinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it } from "vitest";
 import { seedBasicBoard } from "../fixtures/boardFixtures";
+import { Card } from "../../src/types";
 
 beforeEach(() => {
   setActivePinia(createPinia());
@@ -22,11 +23,11 @@ describe("deleteCard", () => {
     const { cardStore, columnStore } = seedBasicBoard();
     cardStore.deleteCard("card-1");
     const column = columnStore.columns["col-1"];
-    const cardsInColumn = Object.values(cardStore.cards).filter(
-      (card) => card.columnId === column.id,
+    const cardsInColumn = column.cardIds.map(
+      (cardId: string) => cardStore.cards[cardId],
     );
-    cardsInColumn.forEach((card) => {
-      expect(card).not.toBeUndefined();
+    cardsInColumn.forEach((card: Card) => {
+      expect(card).toBeDefined();
     });
   });
   it("does nothing if cardId is invalid", () => {

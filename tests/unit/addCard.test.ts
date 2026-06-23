@@ -50,9 +50,9 @@ describe("addCard", () => {
   it("should not add card if column limit is reach", () => {
     const { cardStore, columnStore } = seedBasicBoard();
     cardStore.cards = generateMockItems(50);
-    columnStore.columns["col-1"].cardIds = Object.values(cardStore.cards).map(
-      (card) => card.columnId === "col-1" && card.id,
-    );
+    columnStore.columns["col-1"].cardIds = Object.values(cardStore.cards)
+      .filter((card) => card.columnId === "col-1")
+      .map((card) => card.id);
     const cardsBefore = JSON.parse(JSON.stringify(cardStore.cards));
     const card: CardFormValue = {
       title: "New card",
@@ -61,12 +61,11 @@ describe("addCard", () => {
     };
     expect(cardStore.addCard(card, "col-1", "board-1")).toBeUndefined();
     expect(cardStore.cards).toEqual(cardsBefore);
-    expect(Object.keys(cardStore.cards)).length(50);
+    expect(Object.keys(cardStore.cards)).toHaveLength(50);
   });
   it("should not add card if column WIP limit is reached", () => {
     const { cardStore, columnStore } = seedBasicBoard();
     columnStore.columns["col-1"].wipLimit = 1;
-    cardStore.cards = generateMockItems(1);
     const cardsBefore = JSON.parse(JSON.stringify(cardStore.cards));
 
     const card: CardFormValue = {
@@ -74,10 +73,10 @@ describe("addCard", () => {
       status: "todo",
       priority: "medium",
     };
-    cardStore.addCard(card, "col-1", "board-1");
 
     expect(cardStore.addCard(card, "col-1", "board-1")).toBeUndefined();
     expect(cardStore.cards).toEqual(cardsBefore);
+    expect(columnStore.columns["col-1"].cardIds).toHaveLength(2);
   });
   it("should do nothing add if columnId is invalid", () => {
     const { cardStore } = seedBasicBoard();
@@ -90,7 +89,7 @@ describe("addCard", () => {
     cardStore.addCard(card, "not-real", "board-1");
 
     expect(cardStore.cards).toEqual(cardsBefore);
-    expect(Object.keys(cardStore.cards)).length(4);
+    expect(Object.keys(cardStore.cards)).toHaveLength(4);
   });
   it("should add activity entry on successfully addition", () => {
     const { cardStore } = seedBasicBoard();

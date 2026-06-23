@@ -26,7 +26,7 @@ const generateMockItems = (count: number) => {
   return mockStoreObject;
 };
 
-describe("description", () => {
+describe("addColumn", () => {
   it("should add new column", () => {
     const { columnStore } = seedBasicBoard();
     const column: ColumnFormValue = {
@@ -56,9 +56,9 @@ describe("description", () => {
   it("should do nothing when board limit is reached", () => {
     const { boardStore, columnStore } = seedBasicBoard();
     columnStore.columns = generateMockItems(6);
-    boardStore.boards["board-1"].columnIds = Object.values(
-      columnStore.columns,
-    ).map((column) => column.boardId === "board-1" && column.id);
+    boardStore.boards["board-1"].columnIds = Object.values(columnStore.columns)
+      .filter((column) => column.boardId === "board-1")
+      .map((column) => column.id);
     const columnsBefore = JSON.parse(JSON.stringify(columnStore.columns));
     const column: ColumnFormValue = {
       name: "New Column",
@@ -66,13 +66,13 @@ describe("description", () => {
     expect(columnStore.addColumn(column, "board-1")).toBeUndefined();
     expect(columnStore.columns).toEqual(columnsBefore);
   });
-  it('should do nothing if boardId is invalid', () => {
-    const {  columnStore } = seedBasicBoard();
+  it("should do nothing if boardId is invalid", () => {
+    const { columnStore } = seedBasicBoard();
     const columnsBefore = JSON.parse(JSON.stringify(columnStore.columns));
     const column: ColumnFormValue = {
       name: "New Column",
     };
     expect(columnStore.addColumn(column, "not-real")).toBeUndefined();
     expect(columnStore.columns).toEqual(columnsBefore);
-  })
+  });
 });
