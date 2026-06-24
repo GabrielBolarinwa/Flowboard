@@ -77,8 +77,8 @@ describe("board management", () => {
     cy.getDataTest("dialogContent").should("be.visible");
   });
   it("should not create board if limit is reached", () => {
-    cy.fixture("tenBoards").then((data) => {
-      localStorage.setItem("BoardStore", JSON.stringify(data));
+    cy.fixture("kanbanLimits.json").then((data) => {
+      localStorage.setItem("BoardStore", JSON.stringify(data.BoardStore));
     });
     cy.visit("/");
     cy.getDataTest("addBoardDialogTrigger")
