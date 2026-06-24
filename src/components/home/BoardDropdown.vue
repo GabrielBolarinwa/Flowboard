@@ -8,15 +8,19 @@
         variant="outline"
         class="w-fit absolute right-3 -translate-x-3 border-(--border) z-3"
         aria-label="Board Options"
+        data-test="dropdown-button"
         ><Ellipsis
       /></Button>
     </DropdownMenuTrigger>
-    <DropdownMenuContent class="bg-(--bg) border-(--border-focus) z-3">
+    <DropdownMenuContent
+      class="bg-(--bg) border-(--border-focus) z-3"
+      data-test="dropdown-content"
+    >
       <DropdownMenuLabel class="font-mono text-(--secondary) text-xs"
         >Board Actions</DropdownMenuLabel
       >
       <DropdownMenuSeparator class="bg-(--border-focus)" />
-      <DropdownMenuGroup>
+      <DropdownMenuGroup data-test="dropdown-items-list">
         <DropdownMenuItem @select.prevent="isAlertOpen = true"
           ><Trash2 aria-hidden /> Delete Board</DropdownMenuItem
         >

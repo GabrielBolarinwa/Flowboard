@@ -1,5 +1,8 @@
 <template>
-  <div class="flex flex-col gap-6 mt-9 items-center justify-center">
+  <div
+    class="flex flex-col gap-6 mt-9 items-center justify-center"
+    data-test="noBoardsPrompt"
+  >
     <div
       class="mx-auto bg-(--surface-2) border border-(--border) p-6 rounded-md"
     >

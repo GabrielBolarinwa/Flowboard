@@ -3,7 +3,7 @@
     class="bg-(--surface-2) flex justify-between items-center py-3 px-5 md:px-10 lg:px-20 w-full h-auto border-b border-(--border)"
   >
     <div class="flex justify-center flex-col gap-1 max-w-[60%]">
-      <h1 class="truncate">{{ board.name }}</h1>
+      <h1 class="truncate" data-test="page-title">{{ board.name }}</h1>
       <p class="flex gap-3 items-center font-mono text-xs text-(--muted)">
         <span>{{ columnCount > 0 ? columnCount : "No" }} columns</span>∙<span
           >{{ cardCount > 0 ? cardCount : "No" }} cards</span

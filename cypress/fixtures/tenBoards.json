@@ -1,0 +1,74 @@
+{
+  "boards": {
+    "board-1": {
+      "id": "board-1",
+      "name": "Board 1",
+      "description": null,
+      "columnIds": [],
+      "updatedAt": 0
+    },
+    "board-2": {
+      "id": "board-2",
+      "name": "Board 2",
+      "description": null,
+      "columnIds": [],
+      "updatedAt": 0
+    },
+    "board-3": {
+      "id": "board-3",
+      "name": "Board 3",
+      "description": null,
+      "columnIds": [],
+      "updatedAt": 0
+    },
+    "board-4": {
+      "id": "board-4",
+      "name": "Board 4",
+      "description": null,
+      "columnIds": [],
+      "updatedAt": 0
+    },
+    "board-5": {
+      "id": "board-5",
+      "name": "Board 5",
+      "description": null,
+      "columnIds": [],
+      "updatedAt": 0
+    },
+    "board-6": {
+      "id": "board-6",
+      "name": "Board 6",
+      "description": null,
+      "columnIds": [],
+      "updatedAt": 0
+    },
+    "board-7": {
+      "id": "board-7",
+      "name": "Board 7",
+      "description": null,
+      "columnIds": [],
+      "updatedAt": 0
+    },
+    "board-8": {
+      "id": "board-8",
+      "name": "Board 8",
+      "description": null,
+      "columnIds": [],
+      "updatedAt": 0
+    },
+    "board-9": {
+      "id": "board-9",
+      "name": "Board 9",
+      "description": null,
+      "columnIds": [],
+      "updatedAt": 0
+    },
+    "board-10": {
+      "id": "board-10",
+      "name": "Board 10",
+      "description": null,
+      "columnIds": [],
+      "updatedAt": 0
+    }
+  }
+}

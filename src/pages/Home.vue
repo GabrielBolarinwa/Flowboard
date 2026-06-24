@@ -40,7 +40,11 @@
         <AddBoard trigger="main_button" />
       </div>
       <article class="mt-4">
-        <ul class="flex flex-wrap gap-6.5" v-if="getObjectLength(boards) > 0">
+        <ul
+          class="flex flex-wrap gap-6.5"
+          v-if="getObjectLength(boards) > 0"
+          data-test="boards-list"
+        >
           <li
             class="w-[98.96%] md:w-[48%] lg:w-[31.96%] bg-(--surface) p-6 rounded-lg flex flex-col gap-4 hover:-translate-y-0.5 border border-(--border) hover:border-(--border-focus) relative group"
             v-for="board in boards"

@@ -20,6 +20,7 @@ const { deleteBoard } = useBoardStore();
   <AlertDialog :open="open" @update:open="$emit('update:open', $event)">
     <AlertDialogContent
       class="bg-(--bg) border-(--border) focus:border-(--border-focus)"
+      data-test="delete-alert"
     >
       <AlertDialogHeader
         ><AlertDialogTitle
@@ -35,6 +36,7 @@ const { deleteBoard } = useBoardStore();
           ><Button
             variant="ghost"
             class="border-(--border) hover:bg-(--border)/30"
+            data-test="deleteCancelButton"
           >
             <CircleX aria-hidden /> Cancel
           </Button></AlertDialogCancel
@@ -42,6 +44,7 @@ const { deleteBoard } = useBoardStore();
         <AlertDialogAction
           class="border-(--border) bg-destructive hover:bg-destructive-hover"
           @click="deleteBoard(boardId)"
+          data-test="deleteBoardButton"
           ><Trash2 aria-hidden /> Delete</AlertDialogAction
         >
       </AlertDialogFooter>

@@ -39,9 +39,11 @@ const [description, descriptionAttrs] = defineField("description");
 const onSubmit = handleSubmit((values) => {
   const boardId = addBoard(values);
   isOpen.value = false;
-  setTimeout(() => {
-    router.push(`/board/${boardId}`);
-  }, 1000);
+  if (boardId) {
+    setTimeout(() => {
+      router.push(`/board/${boardId}`);
+    }, 1000);
+  }
 });
 </script>
 
@@ -49,6 +51,7 @@ const onSubmit = handleSubmit((values) => {
   <Button
     @click="isOpen = true"
     v-if="trigger === 'main_button'"
+    data-test="addBoardDialogTrigger"
     class="bg-(--accent) hover:bg-(--accent-hover) py-2! px-3! h-auto w-auto flex justify-center items-center gap-2 rounded-md"
   >
     <Plus aria-hidden /> New Board
@@ -64,6 +67,7 @@ const onSubmit = handleSubmit((values) => {
   <Dialog modal :open="isOpen" @update:open="isOpen = $event">
     <DialogContent
       class="max-w-130 m-0 px-0 bg-(--surface) border-(--border) border-2 radius-lg p-5"
+      data-test="dialogContent"
     >
       <DialogHeader class="">
         <DialogTitle class="bold">Add Board</DialogTitle>
@@ -89,8 +93,11 @@ const onSubmit = handleSubmit((values) => {
               v-bind="nameAttrs"
               v-model="name"
               :aria-invalid="!!errors.name"
+              data-test="boardNameInput"
             />
-            <FieldError>{{ errors.name }}</FieldError>
+            <FieldError data-test="boardNameError">{{
+              errors.name
+            }}</FieldError>
           </Field>
           <Field :data-invalid="!!errors.description">
             <FieldLabel
@@ -126,6 +133,7 @@ const onSubmit = handleSubmit((values) => {
           type="submit"
           class="bg-(--accent) hover:bg-(--accent-hover) py-2! px-3! h-auto w-auto flex justify-center items-center gap-2 rounded-md"
           form="addBoardForm"
+          data-test="submitBoardForm"
           >Create Board</Button
         >
       </DialogFooter>
