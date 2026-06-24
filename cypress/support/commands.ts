@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+export {};
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -35,3 +36,15 @@
 //     }
 //   }
 // }
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      getDataTest(dataTestSelector: string): Chainable<JQuery<HTMLElement>>;
+    }
+  }
+}
+
+Cypress.Commands.add("getDataTest", (dataTestSelector) => {
+  return cy.get(`[data-test="${dataTestSelector}"]`);
+});
