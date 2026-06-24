@@ -51,6 +51,7 @@ const onSubmit = handleSubmit((values) => {
       <Button
         class="w-auto h-auto rounded-full p-1.5! hover:bg-(--surface)"
         aria-label="Edit Column"
+        data-test="editColumnButton"
         ><Edit3
       /></Button>
     </PopoverTrigger>
@@ -68,6 +69,7 @@ const onSubmit = handleSubmit((values) => {
             v-model="name"
             :aria-invalid="!!errors.name"
             placeholder="e.g. House Tasks etc."
+            data-test="renameColumnInput"
           />
           <FieldError>{{ errors.name }}</FieldError>
         </Field>
@@ -97,6 +99,7 @@ const onSubmit = handleSubmit((values) => {
           ><Button
             type="submit"
             class="bg-(--accent) hover:bg-(--accent-hover) py-2! px-3! h-auto w-auto flex justify-center items-center gap-2 rounded-md"
+            data-test="saveEditButton"
             >Save Changes</Button
           >
         </div>

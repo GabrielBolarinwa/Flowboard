@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col gap-3 items-center justify-center text-center absolute top-1/2 -translate-y-1/2"
+    class="flex flex-col gap-3 items-center justify-center text-center absolute top-1/2 -translate-y-1/2" data-test="noCardsPrompt"
   >
     <div
       class="mx-auto bg-(--surface-2) border border-(--border) p-6 rounded-md"

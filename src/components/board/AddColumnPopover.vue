@@ -34,13 +34,16 @@ const onSubmit = handleSubmit((values) => {
 <template>
   <Popover v-model:open="isOpen">
     <PopoverTrigger as-child>
-      <Button class="flex gap-2 bg-(--accent) hover:bg-(--accent-hover)"
+      <Button
+        class="flex gap-2 bg-(--accent) hover:bg-(--accent-hover)"
+        data-test="addColumnButton"
         ><Plus aria-hidden />
         <span class="sr-only md:not-sr-only">Add Column</span></Button
       >
     </PopoverTrigger>
     <PopoverContent
       class="w-80 m-0 px-0 bg-(--surface) border-(--border) border-2 radius-lg p-5"
+      data-test="addColumnPopover"
     >
       <form @submit.prevent="onSubmit">
         <Field :data-invalid="!!errors.name" class="relative">
@@ -53,12 +56,14 @@ const onSubmit = handleSubmit((values) => {
               v-bind="nameAttrs"
               v-model="name"
               :aria-invalid="!!errors.name"
+              data-test="columnNameInput"
               placeholder="e.g. House Tasks etc."
             />
             <Button
               class="absolute top-[50%] -translate-y-1/2 right-1 bg-(--surface) h-full px-3 py-2 w-auto border border-(--border)"
               type="submit"
               aria-label="Add Column"
+              data-test="submitColumnForm"
               ><ArrowRight
             /></Button>
           </div>

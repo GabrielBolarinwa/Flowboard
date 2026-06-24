@@ -2,7 +2,11 @@
   <BoardHeader :boardId="boardId" />
   <main>
     <div class="px-5 lg:px-8 py-6">
-      <ul v-if="columns.length > 0" class="flex gap-5 overflow-x-auto w-auto">
+      <ul
+        v-if="columns.length > 0"
+        class="flex gap-5 overflow-x-auto w-auto"
+        data-test="columnList"
+      >
         <DragDropProvider @dragOver="onDragOver" @dragEnd="onDragEnd">
           <Column
             v-for="(column, index) in columns"

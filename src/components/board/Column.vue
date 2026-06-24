@@ -2,6 +2,7 @@
   <li
     :class="`bg-(--surface-2) rounded-lg p-4 flex w-78 flex-col min-h-[96px] gap-4 h-fit border ${column.wipLimit && column.cardIds.length > column.wipLimit ? `border-destructive/30` : `border-(--border)`}`"
     ref="element"
+    data-test="column"
   >
     <div class="flex justify-between items-center text-xs gap-1">
       <h4
@@ -17,12 +18,14 @@
           variant="secondary"
           class="bg-(--border) py-0! px-2! font-mono h-fit"
           :aria-label="`Card is ${cardCount}`"
-          >{{ cardCount }}</Badge
+          data-test="cardCount"
+          ><span>{{ cardCount }}</span></Badge
         >
         <Button
           @click="createDialogOpen"
           class="w-auto h-auto rounded-full p-1.5! hover:bg-(--surface)"
           aria-label="Add Card"
+          data-test="addCardButton"
         >
           <Plus />
         </Button>

@@ -117,6 +117,7 @@ const today = new Date().toISOString().split("T")[0];
             class="bg-(--surface-2) border-(--border) border p-2 h-auto pl-3"
             v-bind="titleAttrs"
             v-model="title"
+            data-test="cardNameInput"
             :aria-invalid="!!errors.title"
           />
           <FieldError>{{ errors.title }}</FieldError>
@@ -304,6 +305,7 @@ const today = new Date().toISOString().split("T")[0];
         type="submit"
         class="bg-(--accent) hover:bg-(--accent-hover) py-2! px-3! h-auto w-auto flex justify-center items-center gap-2 rounded-md"
         form="cardForm"
+        data-test="cardSubmitButton"
         ><span v-if="mode === 'create'">Create Card</span
         ><span v-else-if="mode === 'edit'" class="flex gap-2 items-center"
           ><Save aria-hidden /> Save

@@ -23,11 +23,13 @@ const { deleteColumn } = useColumnStore();
       <Button
         class="w-auto h-auto rounded-full p-1.5! hover:bg-(--surface)"
         aria-label="Delete Column"
+        data-test="deleteColumnButton"
         ><Trash2
       /></Button>
     </AlertDialogTrigger>
     <AlertDialogContent
       class="bg-(--bg) border-(--border) focus:border-(--border-focus)"
+      data-test="deleteColumnAlert"
     >
       <AlertDialogHeader
         ><AlertDialogTitle
@@ -43,6 +45,7 @@ const { deleteColumn } = useColumnStore();
           ><Button
             variant="ghost"
             class="border-(--border) hover:bg-(--border)/30"
+            data-test="cancelDeleteButton"
           >
             <CircleX aria-hidden /> Cancel
           </Button></AlertDialogCancel
@@ -50,6 +53,7 @@ const { deleteColumn } = useColumnStore();
         <AlertDialogAction
           class="border-(--border) bg-destructive hover:bg-destructive-hover"
           @click="deleteColumn(columnId)"
+          data-test="confirmDeleteButton"
           ><Trash2 aria-hidden /> Delete</AlertDialogAction
         >
       </AlertDialogFooter>
