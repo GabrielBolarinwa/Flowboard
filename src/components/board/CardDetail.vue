@@ -87,6 +87,7 @@ const today = new Date().toISOString().split("T")[0];
 <template>
   <DialogContent
     class="max-w-130 m-0 px-0 bg-(--surface) border-(--border) border-2 rounded-lg p-5 max-h-[90dvh] overflow-y-auto"
+    data-test="cardDetailDialog"
   >
     <DialogHeader class="">
       <DialogTitle class="font-bold"
@@ -135,8 +136,10 @@ const today = new Date().toISOString().split("T")[0];
             placeholder="What is this card for? (optional)"
             v-bind="descriptionAttrs"
             v-model="description"
+            data-test="cardDescription"
             :aria-invalid="!!errors.description"
           />
+
           <FieldError>{{ errors.description }}</FieldError>
         </Field>
         <Field :data-invalid="!!errors.status">
@@ -151,7 +154,11 @@ const today = new Date().toISOString().split("T")[0];
             v-bind="statusAttrs"
             :aria-invalid="!!errors.status"
           >
-            <SelectTrigger class="border-(--border)" id="status">
+            <SelectTrigger
+              class="border-(--border)"
+              id="status"
+              data-test="statusSelect"
+            >
               <SelectValue />
             </SelectTrigger>
             <SelectContent class="bg-(--surface-2) border-(--border)">
@@ -205,7 +212,11 @@ const today = new Date().toISOString().split("T")[0];
             v-bind="priorityAttrs"
             :aria-invalid="!!errors.priority"
           >
-            <SelectTrigger class="border-(--border)" id="priority">
+            <SelectTrigger
+              class="border-(--border)"
+              id="priority"
+              data-test="prioritySelect"
+            >
               <SelectValue />
             </SelectTrigger>
             <SelectContent class="bg-(--surface-2) border-(--border)">

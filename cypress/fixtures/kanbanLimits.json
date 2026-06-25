@@ -86,7 +86,7 @@
         "id": "column-1-1",
         "boardId": "board-1",
         "name": "Heavy Load Column (50 Cards)",
-        "wipLimit": 50,
+        "wipLimit": null,
         "cardIds": [
           "card-1",
           "card-2",

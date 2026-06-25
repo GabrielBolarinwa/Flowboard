@@ -45,6 +45,7 @@ const { deleteCard } = useCardStore();
           ><Button
             variant="ghost"
             class="border-(--border) hover:bg-(--border)/30"
+            data-test="cancelDeleteButton"
           >
             <CircleX aria-hidden /> Cancel
           </Button></AlertDialogCancel

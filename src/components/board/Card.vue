@@ -75,6 +75,7 @@ const { isDragging } = useSortable({
         <p
           class="font-semibold text-sm leading-snug mt-2 cursor-text select-none"
           @click.stop="editingTitle = true"
+          data-test="cardTitle"
           v-if="!editingTitle"
         >
           {{ props.card.title }}
@@ -84,7 +85,10 @@ const { isDragging } = useSortable({
           :cardId="props.card.id"
           @closeInput="editingTitle = false"
         />
-        <p class="text-sm font-regular leading-relaxed text-(--secondary) mt-2">
+        <p
+          class="text-sm font-regular leading-relaxed text-(--secondary) mt-2"
+          data-test="cardDesc"
+        >
           {{ props.card.description }}
         </p>
       </div>

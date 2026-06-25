@@ -1,6 +1,7 @@
 <template>
   <form
     class="flex gap-2 relative bg-(--surface-2) border-(--border) border p-1 h-min pl-3 mt-2 rounded-md"
+    data-test="quickEditForm"
     @submit.prevent="onSubmit"
     @click.stop
   >
@@ -14,6 +15,7 @@
       v-model="cardTitle"
       :value="cardTitle"
       @keydown.esc="emits('closeInput')"
+      data-test="quickEditInput"
       @keydown.stop.enter="onSubmit"
       @keydown.space.stop
       @blur="onSubmit"
