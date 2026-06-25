@@ -53,7 +53,7 @@ const { isDragging } = useSortable({
     :aria-label="`${props.card.title} ${props.card.status}, select for more details`"
     ref="element"
     :data-dragging="isDragging"
-    data-test="card"
+    :data-test="`card-${props.index}`"
   >
     <div class="flex gap-3">
       <div class="w-4 h-4 cursor-grab" ref="handle">

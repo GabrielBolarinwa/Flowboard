@@ -131,7 +131,7 @@ describe("column management", () => {
     cy.getDataTest("cardNameInput").type("New Card");
     cy.getDataTest("cardSubmitButton").click();
     cy.getDataTest("cardCount").contains("span", "1");
-    cy.getDataTest("card").click();
+    cy.getDataTest("card-0").click();
     cy.getDataTest("deleteCardButton").click();
     cy.getDataTest("confirmDeleteButton").click();
     cy.getDataTest("cardCount").contains("span", "0");

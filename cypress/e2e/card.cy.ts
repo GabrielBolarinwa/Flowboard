@@ -21,7 +21,7 @@ describe("card management", () => {
       .click();
     cy.getDataTest("cardNameInput").type("New Card");
     cy.getDataTest("cardSubmitButton").click();
-    cy.getDataTest("cardList").contains("[data-test='card']", "New Card");
+    cy.getDataTest("cardList").contains("[data-test='card-0']", "New Card");
   });
   it("should open card detail dialog", () => {
     cy.getDataTest("addBoardDialogTrigger")
@@ -41,8 +41,8 @@ describe("card management", () => {
       .click();
     cy.getDataTest("cardNameInput").type("New Card");
     cy.getDataTest("cardSubmitButton").click();
-    cy.getDataTest("cardList").contains("[data-test='card']", "New Card");
-    cy.getDataTest("card").click();
+    cy.getDataTest("cardList").contains("[data-test='card-0']", "New Card");
+    cy.getDataTest("card-0").click();
     cy.getDataTest("cardDetailDialog").should("be.visible");
     cy.getDataTest("cardNameInput").should("have.value", "New Card");
     cy.getDataTest("statusSelect").should("contain.text", "Todo");
@@ -66,10 +66,10 @@ describe("card management", () => {
       .click();
     cy.getDataTest("cardNameInput").type("New Card");
     cy.getDataTest("cardSubmitButton").click();
-    cy.getDataTest("cardList").contains("[data-test='card']", "New Card");
+    cy.getDataTest("cardList").contains("[data-test='card-0']", "New Card");
     cy.getDataTest("cardTitle").should("contain.text", "New Card").click();
 
-    cy.getDataTest("card").click();
+    cy.getDataTest("card-0").click();
     cy.getDataTest("cardDetailDialog").should("not.exist");
     cy.getDataTest("quickEditInput").type(" 1");
     cy.getDataTest("quickEditForm").submit();
@@ -94,7 +94,7 @@ describe("card management", () => {
     cy.getDataTest("cardNameInput").type("New Card");
     cy.getDataTest("cardSubmitButton").click();
     cy.getDataTest("cardList")
-      .contains("[data-test='card']", "New Card")
+      .contains("[data-test='card-0']", "New Card")
       .click();
     cy.getDataTest("cardDetailDialog").should("be.visible");
     cy.getDataTest("cardNameInput").type("New Card 1");
@@ -127,13 +127,13 @@ describe("card management", () => {
     cy.getDataTest("cardNameInput").type("New Card");
     cy.getDataTest("cardSubmitButton").click();
     cy.getDataTest("cardList")
-      .contains("[data-test='card']", "New Card")
+      .contains("[data-test='card-0']", "New Card")
       .click();
 
     cy.getDataTest("deleteCardButton").click();
     cy.getDataTest("confirmDeleteButton").click();
     cy.getDataTest("cardList")
-      .contains("[data-test='card']", "New Card")
+      .contains("[data-test='card-0']", "New Card")
       .should("not.exist");
   });
   it("should not delete card on cancel", () => {
@@ -155,13 +155,13 @@ describe("card management", () => {
     cy.getDataTest("cardNameInput").type("New Card");
     cy.getDataTest("cardSubmitButton").click();
     cy.getDataTest("cardList")
-      .contains("[data-test='card']", "New Card")
+      .contains("[data-test='card-0']", "New Card")
       .click();
 
     cy.getDataTest("deleteCardButton").click();
     cy.getDataTest("cancelDeleteButton").click();
     cy.getDataTest("cardList")
-      .contains("[data-test='card']", "New Card")
+      .contains("[data-test='card-0']", "New Card")
       .should("exist");
   });
   it("should not add card on card limit reached", () => {
@@ -186,7 +186,7 @@ describe("card management", () => {
         "Card limit reached — maximum 50 cards per column",
       );
     cy.getDataTest("cardList")
-      .contains("li[data-test=card]", "New Card")
+      .contains("li[data-test=card-0]", "New Card")
       .should("not.exist");
   });
 });

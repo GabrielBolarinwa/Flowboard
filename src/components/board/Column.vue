@@ -2,7 +2,7 @@
   <li
     :class="`bg-(--surface-2) rounded-lg p-4 flex w-78 flex-col min-h-[96px] gap-4 h-fit border ${column.wipLimit && column.cardIds.length > column.wipLimit ? `border-destructive/30` : `border-(--border)`}`"
     ref="element"
-    data-test="column"
+    :data-test="`column-${index}`"
   >
     <div class="flex justify-between items-center text-xs gap-1">
       <h4
