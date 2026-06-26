@@ -6,7 +6,7 @@
   >
     <SunMoon />
   </button>
-  <main class="p-6">
+  <main class="p-6" data-test="homeMain">
     <Transition
       enter-active-class="animate-in fade-in slide-in-from-top duration-3000 delay-500"
       appear

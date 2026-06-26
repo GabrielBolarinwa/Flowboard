@@ -1,6 +1,6 @@
 <template>
   <BoardHeader :boardId="boardId" />
-  <main>
+  <main data-test="boardMain">
     <div class="px-5 lg:px-8 py-6">
       <ul
         v-if="columns.length > 0"
