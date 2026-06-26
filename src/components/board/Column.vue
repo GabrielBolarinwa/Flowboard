@@ -8,6 +8,7 @@
       <h4
         class="font-bold uppercase text-(--secondary) truncate tracking-widest cursor-grab select-none"
         ref="handle"
+        data-test="column-drag-handle"
         :tabindex="0"
       >
         <GripVertical aria-hidden class="mr-1 inline" :size="14" />

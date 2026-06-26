@@ -56,7 +56,11 @@ const { isDragging } = useSortable({
     :data-test="`card-${props.index}`"
   >
     <div class="flex gap-3">
-      <div class="w-4 h-4 cursor-grab" ref="handle">
+      <div
+        class="w-4 h-4 cursor-grab"
+        ref="handle"
+        data-test="card-drag-handle"
+      >
         <GripVertical :size="16" aria-label="Drag Card" />
       </div>
       <div class="-mt-2">
