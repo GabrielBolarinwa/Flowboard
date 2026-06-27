@@ -19,7 +19,14 @@
       </ul>
     </div>
   </main>
-  <div role="status" aria-live="polite" class="sr-only">{{ announcement }}</div>
+  <div
+    role="status"
+    aria-live="polite"
+    data-test="arialiveRegion"
+    class="sr-only"
+  >
+    {{ announcement }}
+  </div>
 </template>
 
 <script lang="ts" setup>

@@ -10,6 +10,7 @@ describe("drag  and drop tests", () => {
     cy.getDataTest("dialogContent").should("be.visible");
     cy.getDataTest("boardNameInput").type("New board");
     cy.getDataTest("submitBoardForm").click();
+    cy.getDataTest("arialiveRegion").should("exist");
     cy.getDataTest("addColumnButton").click();
     cy.getDataTest("columnNameInput").type("New Column");
     cy.getDataTest("submitColumnForm").click();
@@ -32,6 +33,11 @@ describe("drag  and drop tests", () => {
       .find("[data-test=cardList]")
       .realMouseMove(0, 0, { position: "center" })
       .realMouseUp();
+    cy.getDataTest("arialiveRegion").should(
+      "contain",
+      "Card moved to New Column 2",
+    );
+
     cy.getDataTest("column-0").find("[data-test=card-0]").should("not.exist");
     cy.getDataTest("column-1").find("[data-test=card-0]").should("exist");
     cy.getDataTest("column-0")
@@ -100,6 +106,11 @@ describe("drag  and drop tests", () => {
       .realMouseDown({ position: "center" })
       .realMouseMove(500, 0, { position: "center" })
       .realMouseUp();
+    cy.getDataTest("arialiveRegion").should(
+      "contain",
+      "Column moved to position 2",
+    );
+
     cy.get("@listItems").eq(0).should("contain", "New Column 2");
     cy.get("@listItems").eq(1).should("contain", "New Column");
   });
