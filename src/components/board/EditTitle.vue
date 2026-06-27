@@ -14,10 +14,8 @@
       class="text-sm p-0 leading-snug bg-transparent border-none! focus:border-none! focus:outline-none! focus-visible:shadow-(--shadow-none)"
       v-model="cardTitle"
       :value="cardTitle"
-      @keydown.esc="emits('closeInput')"
+      @keydown="handleKeyDown"
       data-test="quickEditInput"
-      @keydown.stop.enter="onSubmit"
-      @keydown.space.stop
       @blur="onSubmit"
     />
   </form>
@@ -36,6 +34,16 @@ const { titleCardEdit } = useCardStore();
 const cardTitle = ref(cards.value[cardId].title);
 
 const emits = defineEmits(["closeInput"]);
+
+function handleKeyDown(event: KeyboardEvent) {
+  if (event.key === "Enter") {
+    event.stopPropagation();
+    onSubmit();
+  } else if (event.key === " ") {
+    event.stopPropagation();
+  }
+}
+
 function onSubmit() {
   if (cardTitle.value.length <= 0) {
     emits("closeInput");
