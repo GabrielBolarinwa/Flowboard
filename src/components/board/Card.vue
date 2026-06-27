@@ -14,7 +14,7 @@ const props = defineProps<{
   index: number;
   columnId: string;
 }>();
-const statusText = statusTextMap[props.card.status];
+const statusText = computed(() => statusTextMap[props.card.status]);
 const dueDate =
   props.card.dueDate &&
   new Date(props.card.dueDate).toLocaleDateString("en-US", {
@@ -29,7 +29,9 @@ const avatar = computed(() =>
     .join("")
     .slice(0, 2),
 );
-const statusVariablePrefix = statusColorVariableMap[props.card.status];
+const statusVariablePrefix = computed(
+  () => statusColorVariableMap[props.card.status],
+);
 const element = ref<HTMLElement | null>(null);
 const handle = ref<HTMLElement | null>(null);
 
