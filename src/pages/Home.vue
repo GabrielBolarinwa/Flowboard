@@ -26,6 +26,7 @@
       <Input
         class="px-5 py-3 pl-7 h-auto rounded-md bg-(--surface-2) border-(--border) border focus:border-(--border-focus)"
         placeholder="Search for your boards"
+        data-test="boardsSearch"
         v-model="searchInput"
       />
       <Search
@@ -48,6 +49,7 @@
           <li
             class="w-[98.96%] md:w-[48%] lg:w-[31.96%] bg-(--surface) p-6 rounded-lg flex flex-col gap-4 hover:-translate-y-0.5 border border-(--border) hover:border-(--border-focus) relative group"
             v-for="board in boards"
+            data-test="board-item"
             :key="board.id"
           >
             <BoardCard :board="board" />
