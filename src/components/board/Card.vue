@@ -15,13 +15,17 @@ const props = defineProps<{
   columnId: string;
 }>();
 const statusText = computed(() => statusTextMap[props.card.status]);
-const dueDate =
-  props.card.dueDate &&
-  new Date(props.card.dueDate).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  });
-const dueDateMs = props.card.dueDate && new Date(props.card.dueDate);
+const dueDate = computed(
+  () =>
+    props.card.dueDate &&
+    new Date(props.card.dueDate).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    }),
+);
+const dueDateMs = computed(
+  () => props.card.dueDate && new Date(props.card.dueDate),
+);
 const avatar = computed(() =>
   props.card.assignee
     ?.split(" ")

@@ -58,6 +58,7 @@ export const useCardStore = defineStore(
       delete cards.value[cardId];
       boards.value[columns.value[card.columnId]?.boardId].updatedAt =
         Date.now();
+      toast.success("Successfully deleted card");
     }
     function editCard(cardId: string, cardFormValue: CardFormValue) {
       const { boards } = storeToRefs(useBoardStore());

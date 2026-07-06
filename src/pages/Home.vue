@@ -82,6 +82,7 @@ import { storeToRefs } from "pinia";
 import { watch } from "vue";
 import { ref, Transition } from "vue";
 import { useThemeStore } from "@/stores/theme";
+import { computed } from "vue";
 
 const themeStore = useThemeStore();
 watch(
@@ -94,8 +95,28 @@ watch(
 
 const searchInput = ref("");
 const { boards: storeBoards } = storeToRefs(useBoardStore());
-const boards = ref<Record<string, Board>>(storeBoards.value);
-watch(searchInput, () => {
+const boards = computed<Record<string, Board>>(() => {
+  if (searchInput.value.length >= 1) {
+    return Object.fromEntries(
+      Object.entries(storeBoards.value).filter(([_, value]) => {
+        if (
+          !value.name.toLowerCase().includes(searchInput.value.toLowerCase()) &&
+          value.description
+        ) {
+          return value.description
+            .toLowerCase()
+            .includes(searchInput.value.toLowerCase());
+        }
+        return value.name
+          .toLowerCase()
+          .includes(searchInput.value.toLowerCase());
+      }),
+    );
+  } else {
+    return storeBoards.value;
+  }
+});
+/* watch(searchInput, () => {
   if (searchInput.value.length >= 1) {
     boards.value = Object.fromEntries(
       Object.entries(storeBoards.value).filter(([_, value]) => {
@@ -115,7 +136,7 @@ watch(searchInput, () => {
   } else {
     boards.value = storeBoards.value;
   }
-});
+}); */
 </script>
 
 <style scoped>

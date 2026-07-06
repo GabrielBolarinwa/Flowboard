@@ -5,6 +5,7 @@ export default function (milliseconds: number) {
   const units: [Intl.RelativeTimeFormatUnit, number][] = [
     ["year", 60 * 60 * 24 * 365],
     ["month", 60 * 60 * 24 * 30.44],
+    ["week", 60 * 60 * 24 * 7],
     ["day", 60 * 60 * 24],
     ["hour", 60 * 60],
     ["minute", 60],

@@ -38,7 +38,7 @@ const { boardId } = defineProps<{ boardId: string }>();
 
 const { boards } = storeToRefs(useBoardStore());
 const { exportBoard } = useBoardStore();
-const board = boards.value[boardId];
+const board = computed(() => boards.value[boardId]);
 const { getColumnCount } = useColumnStore();
 const { getCardCount } = useCardStore();
 const columnCount = computed(() => getColumnCount(boardId));

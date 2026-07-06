@@ -31,12 +31,13 @@ import timeAgo from "@/utils/timeAgo.ts";
 import { Clock, Columns2, KanbanSquare } from "@lucide/vue";
 import BoardDropdown from "./BoardDropdown.vue";
 import { RouterLink } from "vue-router";
+import { computed } from "vue";
 const { board } = defineProps<{
   board: Board;
 }>();
 
 const { getColumnCount } = useColumnStore();
-const columnCount = getColumnCount(board.id);
+const columnCount = computed(() => getColumnCount(board.id));
 </script>
 
 <style></style>

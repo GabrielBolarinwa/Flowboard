@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { boardSchema } from "@/schemas/board.ts";
 import { useBoardStore } from "@/stores/board.ts";
 import Textarea from "../ui/textarea/Textarea.vue";
+import { computed } from "vue";
 
 const boardFormSchema = toTypedSchema(boardSchema);
 
@@ -31,12 +32,12 @@ const { open, boardId } = defineProps<{
   open: boolean;
   boardId: string;
 }>();
-const board = getBoard(boardId);
+const board = computed(() => getBoard(boardId));
 const { handleSubmit, defineField, errors } = useForm({
   validationSchema: boardFormSchema,
   initialValues: {
-    name: board.name,
-    description: board.description,
+    name: board.value.name,
+    description: board.value.description,
   },
 });
 const [name, nameAttrs] = defineField("name");

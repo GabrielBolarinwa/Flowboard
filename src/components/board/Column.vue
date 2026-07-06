@@ -35,7 +35,10 @@
       </div>
     </div>
     <ScrollArea class="h-[57.5dvh]">
-      <ul class="flex flex-col gap-2 min-h-[57.5dvh]" data-test="cardList">
+      <ul
+        class="flex flex-col gap-2 min-h-[57.5dvh] relative"
+        data-test="cardList"
+      >
         <Card
           v-for="(card, index) in cards"
           :card="card"

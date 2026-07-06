@@ -15,7 +15,7 @@ export const useColumnStore = defineStore(
       if (!boards.value[boardId]) return;
 
       const column: Column = {
-        id: nanoid(Math.round(15.75)),
+        id: nanoid(16),
         name: columnFormValue.name,
         boardId: boardId,
         cardIds: [],

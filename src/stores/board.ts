@@ -38,6 +38,7 @@ export const useBoardStore = defineStore(
         return delete columns.value[columnId];
       });
       delete boards.value[boardId];
+      toast.success("Successfully deleted board");
     }
     function editBoard(
       boardId: string,

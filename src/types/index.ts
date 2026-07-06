@@ -47,14 +47,14 @@ export interface ColumnFormValue {
 
 export interface CardFormValue {
   title: string;
-  status: status;
+  status: Status;
   priority: "low" | "medium" | "high";
   description?: string | undefined;
   assignee?: string | undefined;
   dueDate?: string | undefined;
 }
 
-export type status =
+export type Status =
   | "todo"
   | "in-progress"
   | "in-review"

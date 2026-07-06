@@ -1,23 +1,11 @@
 import { createPinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it /* , Mock, vi */ } from "vitest";
 import { seedBasicBoard } from "../fixtures/boardFixtures";
-// import { ExternalToast, toast } from "vue-sonner";
-// import { Component } from "vue";
+
 beforeEach(() => {
   setActivePinia(createPinia());
 });
 describe("moveCard", () => {
-  /* let toastSpy: Mock<
-    (
-      message: string | (() => string | Component) | Component,
-      data?: ExternalToast,
-    ) => string | number
-  >;
-
-  beforeEach(() => {
-    toastSpy = vi.spyOn(toast, "warning");
-  }); */
-
   it("updates card.columnId to the destination column", () => {
     const { cardStore } = seedBasicBoard();
     cardStore.moveCard("card-1", "col-2");
