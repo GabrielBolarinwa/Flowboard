@@ -22,10 +22,10 @@
       <DropdownMenuSeparator class="bg-(--border-focus)" />
       <DropdownMenuGroup data-test="dropdown-items-list">
         <DropdownMenuItem @select.prevent="isAlertOpen = true"
-          ><Trash2 aria-hidden /> Delete Board</DropdownMenuItem
+          ><Trash2 aria-hidden="true"/> Delete Board</DropdownMenuItem
         >
         <DropdownMenuItem @select.prevent="isDialogOpen = true"
-          ><Edit3 aria-hidden /> Edit Board</DropdownMenuItem
+          ><Edit3 aria-hidden="true" /> Edit Board</DropdownMenuItem
         >
       </DropdownMenuGroup>
     </DropdownMenuContent>

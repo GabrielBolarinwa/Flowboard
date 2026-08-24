@@ -11,7 +11,7 @@
         data-test="column-drag-handle"
         :tabindex="0"
       >
-        <GripVertical aria-hidden class="mr-1 inline" :size="14" />
+        <GripVertical aria-hidden="true" class="mr-1 inline" :size="14" />
         {{ column.name }}
       </h4>
       <div class="text-(--muted) flex gap-1.5 items-center min-w-1/2 w-max">

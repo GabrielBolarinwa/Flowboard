@@ -4,7 +4,7 @@
     class="p-3 border-(--border) border-dashed border rounded-md justify-start text-sm! font-medium py-2 px-3 items-center gap-2 w-full hover:border-(--border-focus) text-(--secondary) transition-[0.15s]"
     @click="inputActive = true"
   >
-    <Plus aria-hidden /> Add Card
+    <Plus aria-hidden="true" /> Add Card
   </Button>
   <form v-else class="flex gap-2" @submit.prevent="submitForm">
     <Label for="cardTitle" class="sr-only">Enter Card Name:</Label>

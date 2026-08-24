@@ -47,14 +47,14 @@ const { deleteColumn } = useColumnStore();
             class="border-(--border) hover:bg-(--border)/30"
             data-test="cancelDeleteButton"
           >
-            <CircleX aria-hidden /> Cancel
+            <CircleX aria-hidden="true" /> Cancel
           </Button></AlertDialogCancel
         >
         <AlertDialogAction
           class="border-(--border) bg-destructive hover:bg-destructive-hover"
           @click="deleteColumn(columnId)"
           data-test="confirmDeleteButton"
-          ><Trash2 aria-hidden /> Delete</AlertDialogAction
+          ><Trash2 aria-hidden="true" /> Delete</AlertDialogAction
         >
       </AlertDialogFooter>
     </AlertDialogContent>

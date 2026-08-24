@@ -38,14 +38,14 @@ const { deleteBoard } = useBoardStore();
             class="border-(--border) hover:bg-(--border)/30"
             data-test="deleteCancelButton"
           >
-            <CircleX aria-hidden /> Cancel
+            <CircleX aria-hidden="true" /> Cancel
           </Button></AlertDialogCancel
         >
         <AlertDialogAction
           class="border-(--border) bg-destructive hover:bg-destructive-hover"
           @click="deleteBoard(boardId)"
           data-test="deleteBoardButton"
-          ><Trash2 aria-hidden /> Delete</AlertDialogAction
+          ><Trash2 aria-hidden="true" /> Delete</AlertDialogAction
         >
       </AlertDialogFooter>
     </AlertDialogContent>

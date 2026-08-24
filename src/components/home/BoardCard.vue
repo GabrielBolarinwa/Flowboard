@@ -2,7 +2,7 @@
   <BoardDropdown :boardId="board.id" />
 
   <div class="p-4 bg-(--accent-subtle) w-12.5 h-12.5 rounded-md">
-    <KanbanSquare aria-hidden :size="18" />
+    <KanbanSquare aria-hidden="true" :size="18" />
   </div>
   <h4 class="font-bold" data-test="board-name">{{ board.name }}</h4>
   <p class="text-sm text-(--secondary)">

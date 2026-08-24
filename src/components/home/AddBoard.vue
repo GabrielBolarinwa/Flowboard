@@ -54,7 +54,7 @@ const onSubmit = handleSubmit((values) => {
     data-test="addBoardDialogTrigger"
     class="bg-(--accent) hover:bg-(--accent-hover) py-2! px-3! h-auto w-auto flex justify-center items-center gap-2 rounded-md"
   >
-    <Plus aria-hidden /> New Board
+    <Plus aria-hidden="true" /> New Board
   </Button>
   <Button
     @click="isOpen = true"
@@ -62,7 +62,7 @@ const onSubmit = handleSubmit((values) => {
     variant="outline"
     class="bg-(--accent-subtle) border border-(--border) hover:border-(--border-focus) py-1.5 px-3 flex justify-center items-center gap-2 rounded-md"
   >
-    <Plus aria-hidden /> New Board
+    <Plus aria-hidden="true" /> New Board
   </Button>
   <Dialog modal :open="isOpen" @update:open="isOpen = $event">
     <DialogContent

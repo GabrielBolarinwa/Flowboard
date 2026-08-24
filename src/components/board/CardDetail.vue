@@ -319,7 +319,7 @@ const today = new Date().toISOString().split("T")[0];
         data-test="cardSubmitButton"
         ><span v-if="mode === 'create'">Create Card</span
         ><span v-else-if="mode === 'edit'" class="flex gap-2 items-center"
-          ><Save aria-hidden /> Save
+          ><Save aria-hidden="true" /> Save
         </span></Button
       >
     </DialogFooter>

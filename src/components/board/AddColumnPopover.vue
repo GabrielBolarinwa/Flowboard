@@ -37,7 +37,7 @@ const onSubmit = handleSubmit((values) => {
       <Button
         class="flex gap-2 bg-(--accent) hover:bg-(--accent-hover)"
         data-test="addColumnButton"
-        ><Plus aria-hidden />
+        ><Plus aria-hidden="true" />
         <span class="sr-only md:not-sr-only">Add Column</span></Button
       >
     </PopoverTrigger>

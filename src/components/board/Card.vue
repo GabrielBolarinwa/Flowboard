@@ -114,7 +114,7 @@ const { isDragging } = useSortable({
           v-if="dueDate"
           :class="`flex gap-2 items-center ${Date.now() > Number(dueDateMs) ? 'text-destructive/80' : ''}`"
         >
-          <Calendar aria-hidden :size="16" />{{ dueDate }}
+          <Calendar aria-hidden="true" :size="16" />{{ dueDate }}
         </p>
         <Badge
           v-if="avatar"
