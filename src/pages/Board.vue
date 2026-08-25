@@ -33,18 +33,18 @@
 import BoardHeader from "@/components/board/BoardHeader.vue";
 import Column from "@/components/board/Column.vue";
 import { useBoardStore } from "@/stores/board";
+import { useCardStore } from "@/stores/card";
 import { useColumnStore } from "@/stores/column";
-import { storeToRefs } from "pinia";
-import { computed, onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
+import { isSortable } from "@dnd-kit/dom/sortable";
+import { move } from "@dnd-kit/helpers";
 import {
   DragDropProvider,
   type DragEndEvent,
   type DragOverEvent,
 } from "@dnd-kit/vue";
-import { isSortable } from "@dnd-kit/dom/sortable";
-import { move } from "@dnd-kit/helpers";
-import { useCardStore } from "@/stores/card";
+import { storeToRefs } from "pinia";
+import { computed, onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
 
 const route = useRoute();
 const boardId = route.params.boardId as string;
