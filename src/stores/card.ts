@@ -91,6 +91,7 @@ export const useCardStore = defineStore(
           },
         ],
       };
+      if (initialCard.title === editedCard.title) return;
       cards.value[cardId] = editedCard;
       boards.value[columns.value[initialCard.columnId]?.boardId].updatedAt =
         Date.now();
