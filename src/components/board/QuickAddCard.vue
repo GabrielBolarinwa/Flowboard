@@ -6,7 +6,13 @@
   >
     <Plus aria-hidden="true" /> Add Card
   </Button>
-  <form v-else class="flex gap-2" @submit.prevent="submitForm">
+  <form
+    v-else
+    class="flex gap-2"
+    @submit.prevent="
+      cardTitle.length > 0 ? submitForm() : (inputActive = false)
+    "
+  >
     <Label for="cardTitle" class="sr-only">Enter Card Name:</Label>
     <Input
       id="cardTitle"
@@ -50,10 +56,6 @@ function cancelQuickAdd() {
 }
 
 function submitForm() {
-  if (cardTitle.value.length <= 0) {
-    inputActive.value = false;
-    return;
-  }
   const card: CardFormValue = {
     title: cardTitle.value,
     status: "todo",
